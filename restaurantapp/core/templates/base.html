@@ -15,7 +15,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'tasks:task_list' %}">Tareas</a></li>
                     {% if user.is_manager or user.is_chef %}
-                        <li><a href="{% url 'tasks:assign_task' %}">Asignar Tareas</a></li>
+                        <li><a href="{% url 'tasks:create_task' %}">Asignar Tarea</a></li>  <!-- 🎯 Aquí está el botón -->
                     {% endif %}
                     <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
                 {% else %}
@@ -23,7 +23,6 @@
                 {% endif %}
             </ul>
         </nav>
-    </header>
 
     <main>
         {% block content %}
