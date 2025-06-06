@@ -26,6 +26,8 @@ class CustomerUser(AbstractUser):
     notifications_enabled = models.BooleanField(default=True)
     date_joined_restaurant = models.DateField(blank=True, null=True)
     average_task_completed = models.DateTimeField(blank=True, null=True)
+
+    
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})" 
     
