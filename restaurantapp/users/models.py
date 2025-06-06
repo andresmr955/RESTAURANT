@@ -19,6 +19,20 @@ class CustomerUser(AbstractUser):
     ]
 
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='cook')
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})" 
+    
+    def is_manager(self):
+        return self.role == 'admin'
+    
+    def is_chef(self):
+        return self.role == 'chef'
+    
+    def is_cook(self):
+        return self.role == 'cook'
+    
+    class Meta:
+        ordering = ['username']
