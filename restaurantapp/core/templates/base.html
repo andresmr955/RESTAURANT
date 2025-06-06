@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Productivity Restaurant{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'tasks:task_list' %}">Tareas</a></li>
+                    {% if user.is_manager or user.is_chef %}
+                        <li><a href="{% url 'tasks:assign_task' %}">Asignar Tareas</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Aquí se insertará el contenido de cada página específica -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ year }} Productivity Restaurant. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
