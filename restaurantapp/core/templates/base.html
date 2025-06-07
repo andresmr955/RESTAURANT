@@ -13,13 +13,16 @@
             <ul>
                 <li><a href="{% url 'core:home' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'tasks:task_list' %}">Tareas</a></li>
+                    <li><a href="{% url 'tasks:task_list' %}">Tasks</a></li>
                     {% if user.is_manager or user.is_chef %}
-                        <li><a href="{% url 'tasks:create_task' %}">Asignar Tarea</a></li>  <!-- 🎯 Aquí está el botón -->
+                        <li><a href="{% url 'tasks:create_task' %}">Assign tasks</a></li> 
                     {% endif %}
-                    <li><a href="{% url 'users:logout' %}">Cerrar Sesión</a></li>
+                    <form method="post" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
                 {% else %}
-                    <li><a href="{% url 'users:login' %}">Iniciar Sesión</a></li>
+                    <li><a href="{% url 'users:login' %}">Sign in</a></li>
                 {% endif %}
             </ul>
         </nav>
