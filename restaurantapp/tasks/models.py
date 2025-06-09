@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from datetime import timedelta
+
 # Create your models here.
 
 class Task(models.Model):
@@ -23,11 +25,17 @@ class Task(models.Model):
     
     comments = models.TextField(blank=True, null=True)
 
-    def total_time(self):
+    def total_time_minutes(self):
         if self.start_time and self.end_time:
-            return (self.end_time - self.start_time).total_seconds() / 60
+            return round((self.end_time - self.start_time).total_seconds() / 60, 2)
         return None
 
+    @property
+    def duration(self):
+        if self.start_time and self.end_time:
+            return self.end_time - self.start_time
+        return timedelta()
+        
     def __str__(self):
         return f"{self.description} for {self.assigned_employee.username}"
     

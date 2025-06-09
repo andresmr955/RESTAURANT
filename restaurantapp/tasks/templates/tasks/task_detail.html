@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h2>{{ task.description }}</h2>
+<p>Assigned to: {{ task.assigned_employee.username }}</p>
+
+{% if task.start_time %}
+    <p>Start: {{ task.start_time }}</p>
+{% endif %}
+{% if task.end_time %}
+    <p>Fin: {{ task.end_time }}</p>
+{% endif %}
+
+{% if task.duration %}
+    <p>Duration: {{ task.total_time_minutes}}</p>
+    <p>Total in minutes: {{ task.total_time_minutes }}</p>
+{% else %}
+    <p>Duration: Not registered yet</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {% if not task.start_time %}
+        <button type="submit" name="action" value="start">Start task</button>
+    {% elif not task.end_time %}
+        <button type="submit" name="action" value="stop">End task</button>
+    {% endif %}
+</form>
+
+{% endblock%} 

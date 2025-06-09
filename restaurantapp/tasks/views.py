@@ -1,10 +1,12 @@
 # tasks/views.py
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from .models import Task
 from .forms import TaskForm
 
+from django.utils import timezone
+from django.shortcuts import redirect
 
 class TaskCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Task
@@ -28,3 +30,24 @@ class TaskListView(ListView):
     model = Task
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Task.objects.filter(assigned_employee=user)
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'tasks/task_detail.html'
+
+    def post(self, request, *args, **kwargs):
+        task = self.get_object()
+        action = request.POST.get('action')
+
+        if action == 'start' and not task.start_time:
+            task.start_time = timezone.now()
+            task.save()
+        elif action == 'stop' and task.start_time and not task.end_time:
+            task.end_time = timezone.now()
+            task.save()
+
+        return redirect(reverse_lazy('tasks:task_detail', kwargs={'pk': task.pk}))
