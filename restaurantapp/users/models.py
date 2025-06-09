@@ -22,7 +22,7 @@ class CustomerUser(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     date_birth = models.DateField(blank=True, null=True)
-    address = models.DateField(blank=True, null=True)
+    address = models.CharField(blank=True, null=True)
     notifications_enabled = models.BooleanField(default=True)
     date_joined_restaurant = models.DateField(blank=True, null=True)
     average_task_completed = models.DateTimeField(blank=True, null=True)

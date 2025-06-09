@@ -16,6 +16,8 @@
                     <li><a href="{% url 'tasks:task_list' %}">Tasks</a></li>
                     {% if user.is_manager or user.is_chef %}
                         <li><a href="{% url 'tasks:create_task' %}">Assign tasks</a></li> 
+                        <li><a href="{% url 'users:add-employee' %}">Add Employees</a></li> 
+                        <li><a href="{% url 'users:employee-list' %}">Employees</a></li> 
                     {% endif %}
                     <form method="post" action="{% url 'users:logout' %}">
                         {% csrf_token %}

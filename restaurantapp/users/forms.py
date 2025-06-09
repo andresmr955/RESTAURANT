@@ -20,4 +20,6 @@ class EmployeeForm(forms.ModelForm):
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
+        else:
+            print(form.errors)
         return user

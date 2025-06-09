@@ -1,8 +1,12 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views.generic import CreateView, ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import LoginView
 from .models import CustomerUser
 from .forms import EmployeeForm
+
+from django.http import HttpResponseBadRequest
+
 
 
 class EmployeeCreateView(UserPassesTestMixin, CreateView):
@@ -14,6 +18,10 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_manager()
 
+    def form_invalid(self, form):
+        print(form.errors)  # Imprime los errores en consola para depuración
+        return super().form_invalid(form)
+
 class EmployeeList(UserPassesTestMixin, ListView):
     model = CustomerUser
     template_name = 'users/employee_list.html'
@@ -24,3 +32,10 @@ class EmployeeList(UserPassesTestMixin, ListView):
     
     def get_queryset(self):
         return CustomerUser.objects.exclude(role='admin')
+
+
+class DashboardAdminView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+    template_name = "users/admin_dashboard.html"
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_manager()
