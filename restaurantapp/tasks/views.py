@@ -8,11 +8,13 @@ from .forms import TaskForm
 from django.utils import timezone
 from django.shortcuts import redirect
 
+from users.models import CustomerUser
+
 class TaskCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
-    success_url = reverse_lazy('tasks:task_list')  # Ajusta esta URL a la de tu lista de tareas
+    success_url = reverse_lazy('tasks:create_task')  
 
    
     def test_func(self):
@@ -51,3 +53,17 @@ class TaskDetailView(DetailView):
             task.save()
 
         return redirect(reverse_lazy('tasks:task_detail', kwargs={'pk': task.pk}))
+
+class EmployeeTaskListView(ListView):
+    model = Task
+    template_name = 'tasks/employee_task_list.html'
+    context_object_name = 'tasks'
+
+    def get_queryset(self):
+        employee_id = self.kwargs['employee_id']
+        return Task.objects.filter(assigned_employee__id=employee_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['employee'] = CustomerUser.objects.get(id=self.kwargs['employee_id'])
+        return context

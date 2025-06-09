@@ -2,14 +2,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings    
 from django.conf.urls.static import static
-from .views import TaskCreateView, TaskListView, TaskDetailView
+from .views import TaskCreateView, TaskListView, TaskDetailView, EmployeeTaskListView
 
 app_name = 'tasks'
 
 urlpatterns = [
     path('create/', TaskCreateView.as_view(), name='create_task'),
     path('tasks/', TaskListView.as_view(), name='task_list'),
-    path('task-detail/<int:pk>', TaskDetailView.as_view(), name='task_detail')
+    path('task-detail/<int:pk>', TaskDetailView.as_view(), name='task_detail'),
+    path('employee/<int:employee_id>/', EmployeeTaskListView.as_view(), name='task_list'),
+  
     
 ]
 

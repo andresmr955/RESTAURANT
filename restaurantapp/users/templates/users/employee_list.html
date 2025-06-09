@@ -17,6 +17,7 @@
             <th>Date</th>
             <th>Address</th>
             <th>Notifications</th>
+            <th>Id</th>
         </tr>
     </thead>
     <tbody>
@@ -37,12 +38,16 @@
             </td>
             <td>{{ employee.date_birth }}</td>
             <td>{{ employee.address }}</td>
-            <td>{{ employee.notifications_enabled }}</td>
             
+            <td>{{ employee.notifications_enabled }}</td>
+            <td>{{ employee.id }}</td>
+            <td>
+            <a href="{% url 'tasks:task_list' employee.id %}">View Tasks</a>
+            </td>
         </tr>
         {% empty %}
         <tr>
-            <td colspan="4">No employees found.</td>
+            <td colspan="11">No employees found.</td>
         </tr>
         {% endfor %}
     </tbody>
