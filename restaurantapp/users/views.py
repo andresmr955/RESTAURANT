@@ -17,7 +17,6 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
 class EmployeeList(UserPassesTestMixin, ListView):
     model = CustomerUser
     template_name = 'users/employee_list.html'
-    success_url = reverse_lazy('add_employee')
     context_object_name = 'employees'
 
     def test_func(self):
