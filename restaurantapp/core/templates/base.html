@@ -19,7 +19,7 @@
                         <li><a href="{% url 'users:add-employee' %}">Add Employees</a></li> 
                         <li><a href="{% url 'users:employee_list' %}">Employees</a></li> 
                     {% endif %}
-                    {% if user.is_cook %}
+                    {% if user.is_cook or user.is_chef %}
                     <li><a href="{% url 'tasks:task_list' %}">Tasks</a></li>
                     {% endif %}
                     <form method="post" action="{% url 'users:logout' %}">
