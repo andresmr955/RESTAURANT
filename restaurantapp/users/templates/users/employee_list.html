@@ -9,8 +9,14 @@
         <tr>
             <th>Username</th>
             <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Role</th>
             <th>Phone Number</th>
+            <th>Photo</th>
+            <th>Date</th>
+            <th>Address</th>
+            <th>Notifications</th>
         </tr>
     </thead>
     <tbody>
@@ -18,8 +24,21 @@
         <tr>
             <td>{{ employee.username }}</td>
             <td>{{ employee.email }}</td>
+            <td>{{ employee.first_name }}</td>
+            <td>{{ employee.last_name }}</td>
             <td>{{ employee.get_role_display }}</td>
             <td>{{ employee.phone_number }}</td>
+            <td>
+                {% if employee.avatar %}
+                    <img src="{{ employee.avatar.url }}" alt="Avatar" width="50">
+                {% else %}
+                    No avatar
+                {% endif %}
+            </td>
+            <td>{{ employee.date_birth }}</td>
+            <td>{{ employee.address }}</td>
+            <td>{{ employee.notifications_enabled }}</td>
+            
         </tr>
         {% empty %}
         <tr>
