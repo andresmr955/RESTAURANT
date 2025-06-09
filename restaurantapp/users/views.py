@@ -8,7 +8,16 @@ from .forms import EmployeeForm
 from django.http import HttpResponseBadRequest
 
 
+class CustomLoginView(LoginView):
+    template_name = 'users/login.html'
 
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_manager():
+            return reverse_lazy('core:admin_dashboard')
+        else: 
+            return reverse_lazy('tasks:task_list')
+            
 class EmployeeCreateView(UserPassesTestMixin, CreateView):
     model = CustomerUser
     form_class = EmployeeForm
@@ -34,8 +43,3 @@ class EmployeeList(UserPassesTestMixin, ListView):
         return CustomerUser.objects.exclude(role='admin')
 
 
-class DashboardAdminView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
-    template_name = "users/admin_dashboard.html"
-
-    def test_func(self):
-        return self.request.user.is_authenticated and self.request.user.is_manager()
