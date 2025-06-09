@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from .models import CustomerUser
 from .forms import EmployeeForm
+
 
 class EmployeeCreateView(UserPassesTestMixin, CreateView):
     model = CustomerUser
@@ -12,3 +13,15 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
 
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_manager()
+
+class EmployeeList(UserPassesTestMixin, ListView):
+    model = CustomerUser
+    template_name = 'users/employee_list.html'
+    success_url = reverse_lazy('add_employee')
+    context_object_name = 'employees'
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_manager()
+    
+    def get_queryset(self):
+        return CustomerUser.objects.exclude(role='admin')
