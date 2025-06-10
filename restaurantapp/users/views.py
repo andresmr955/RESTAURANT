@@ -8,6 +8,10 @@ from .forms import EmployeeForm
 from django.http import HttpResponseBadRequest
 
 
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomTokenSerializer
+
+
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'
 
@@ -43,3 +47,6 @@ class EmployeeList(UserPassesTestMixin, ListView):
         return CustomerUser.objects.exclude(role='admin')
 
 
+
+class LoginView(TokenObtainPairView):
+    serializer_class = CustomTokenSerializer
