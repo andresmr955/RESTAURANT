@@ -21,10 +21,11 @@
 
 <form method="post">
     {% csrf_token %}
+    <div id="timer">00:00:00</div>
     {% if not task.start_time %}
-        <button type="submit" name="action" value="start">Start task</button>
+        <button type="submit" name="action" value="start" id="startBtn">Start task</button>
     {% elif not task.end_time %}
-        <button type="submit" name="action" value="stop">End task</button>
+        <button type="submit" name="action" value="stop" id="pauseBtn" >End task</button>
     {% endif %}
 </form>
 

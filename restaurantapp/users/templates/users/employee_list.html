@@ -17,7 +17,7 @@
             <th>Date</th>
             <th>Address</th>
             <th>Notifications</th>
-            <th>Id</th>
+            <th>Tasks</th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +40,8 @@
             <td>{{ employee.address }}</td>
             
             <td>{{ employee.notifications_enabled }}</td>
-            <td>{{ employee.id }}</td>
+        
+            
             <td>
             <a href="{% url 'tasks:task_list' employee.id %}">View Tasks</a>
             </td>
