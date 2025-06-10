@@ -27,6 +27,12 @@ class CustomerUser(AbstractUser):
     date_joined_restaurant = models.DateField(blank=True, null=True)
     average_task_completed = models.DateTimeField(blank=True, null=True)
     
+
+    # Establecer email como campo de autenticación
+    email = models.EmailField(unique=True)  # Aseguramos que el email sea único
+    USERNAME_FIELD = 'email'  # Usamos 'email' como el campo de autenticación principal
+    REQUIRED_FIELDS = ['username']  # username sigue siendo necesario para la creación del superusuario, pero no en la autenticación
+
     
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})" 
