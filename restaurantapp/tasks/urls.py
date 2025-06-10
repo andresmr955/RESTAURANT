@@ -2,9 +2,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings    
 from django.conf.urls.static import static
-from .views import TaskCreateView, TaskListView, TaskDetailView, EmployeeTaskListView
+from .views import TaskCreateView, TaskListView, TaskDetailView, EmployeeTaskListView, TaskViewSet
+
+from rest_framework.routers import DefaultRouter
 
 app_name = 'tasks'
+
+router = DefaultRouter()
+router.register("taskviewset", TaskViewSet) 
 
 urlpatterns = [
     path('create/', TaskCreateView.as_view(), name='create_task'),
@@ -13,7 +18,7 @@ urlpatterns = [
     path('employee/<int:employee_id>/', EmployeeTaskListView.as_view(), name='task_list'),
   
     
-]
+] + router.urls
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,6 +9,9 @@ from django.utils import timezone
 from django.shortcuts import redirect
 
 from users.models import CustomerUser
+from .serializers import TaskSerializer
+
+from rest_framework import viewsets, permissions
 
 class TaskCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Task
@@ -67,3 +70,10 @@ class EmployeeTaskListView(ListView):
         context = super().get_context_data(**kwargs)
         context['employee'] = CustomerUser.objects.get(id=self.kwargs['employee_id'])
         return context
+
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated] 
