@@ -27,7 +27,7 @@
                         <button type="submit">Logout</button>
                     </form>
                 {% else %}
-                    <li><a href="{% url 'users:login' %}">Sign in</a></li>
+                    <li><a href="{% url 'users:jwt_login' %}">Sign in</a></li>
                 {% endif %}
             </ul>
         </nav>
