@@ -2,21 +2,26 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
-from .models import CustomerUser
 from .forms import EmployeeForm
 
 from django.http import HttpResponseBadRequest
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import CustomTokenSerializer, EmployeeSerializer, EmployeeCreateSerializer
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
 
+
+##  Important Imports
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
+from .models import CustomerUser
+from .serializers import CustomTokenSerializer, EmployeeSerializer, EmployeeCreateSerializer
+
 
 
 class CustomLoginView(LoginView):
@@ -72,32 +77,16 @@ class EmployeeList(UserPassesTestMixin, ListView):
         return CustomerUser.objects.exclude(role='admin')
 
 
-
-class EmployeeListAPI(APIView):
+class EmployeeListCreateAPI(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
+    queryset = CustomerUser.objects.all()
 
-    def get(self, request):
-        user = request.user
-        if not user.is_manager():
-            return Response({"detail": "Permission denied"}, status=403)
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return EmployeeCreateSerializer
+        return EmployeeSerializer
 
-
-        employees = CustomerUser.objects.exclude(role="admin")
-        serializer = EmployeeSerializer(employees, many=True)
-        return Response(serializer.data)
-
-
-class EmployeeCreateAPI(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        serializer = EmployeeCreateSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            employee = serializer.save()
-            return Response({"message": "Employee successfully created"}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
     def perform_create(self, serializer):
         if not self.request.user.is_manager():
-            raise PermissionDenied("Just admins can create employees")
+            raise PermissionDenied("Only managers can create employees")
         serializer.save()

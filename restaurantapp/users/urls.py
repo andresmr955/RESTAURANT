@@ -5,8 +5,7 @@ from .views import (
     EmployeeList, 
     CustomLoginView,
     LoginView,
-    EmployeeListAPI,
-    EmployeeCreateAPI
+    EmployeeListCreateAPI
 
     )
 
@@ -29,8 +28,8 @@ urlpatterns = [
     path("loginjwt/",   LoginView.as_view(),  name="jwt_login"),   # POST
     # http://127.0.0.1:8000/api/auth/loginjwt/
     path("refresh/", TokenRefreshView.as_view(), name="jwt_refresh"),
-    path("employees-list/", EmployeeListAPI.as_view(), name="employees_list_api"),
-    # http://127.0.0.1:8000/api/auth/employees-list-api
-    path("add-employee-api/", EmployeeCreateAPI.as_view(), name="add_employee_api")
-    #http://localhost:8000/api/auth/add-employee-api/
+    path("employees/", EmployeeListCreateAPI.as_view(), name="employees_api"),
+    # http://127.0.0.1:8000/api/auth/employees/
+    
+  
 ]
