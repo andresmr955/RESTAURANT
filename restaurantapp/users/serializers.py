@@ -2,6 +2,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate
 from rest_framework import exceptions
 from .models import CustomerUser
+from rest_framework import serializers
 
 class CustomTokenSerializer(TokenObtainPairSerializer):
     username = None
@@ -34,3 +35,16 @@ class CustomTokenSerializer(TokenObtainPairSerializer):
 
         # Si todo está bien, generamos el token
         return super().validate(attrs)
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerUser
+        fields = [  'role',
+                    'phone_number',
+                    'avatar',
+                    'date_birth',
+                    'address',
+                    'notifications_enabled',
+                    'date_joined_restaurant',
+                    'average_task_completed']
+
