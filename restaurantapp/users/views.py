@@ -16,7 +16,7 @@ from rest_framework import status
 
 
 ##  Important Imports
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from .models import CustomerUser
@@ -90,3 +90,15 @@ class EmployeeListCreateAPI(ListCreateAPIView):
         if not self.request.user.is_manager():
             raise PermissionDenied("Only managers can create employees")
         serializer.save()
+
+class EmployeeDetailUpdateAPI(RetrieveUpdateAPIView):
+    queryset = CustomerUser.objects.all()
+    serializer_class = EmployeeSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'pk' 
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_manager() or user.is_chef():
+            return CustomerUser.objects.all()
+        return CustomerUser.objects.none()
