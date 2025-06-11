@@ -5,7 +5,8 @@ from .views import (
     EmployeeList, 
     CustomLoginView,
     LoginView,
-    EmployeeListAPI
+    EmployeeListAPI,
+    EmployeeCreateAPI
 
     )
 
@@ -15,12 +16,20 @@ app_name = 'users'
 
 urlpatterns = [
    
-   
+    #URLS TO PROVE MY MODELS
     # path('login/', CustomLoginView.as_view(template_name="users/login.html") , name="login"),
     path('logout/', auth_views.LogoutView.as_view(next_page="users:login"), name="logout"),
     path('add-employee/', EmployeeCreateView.as_view(), name="add-employee"),
     path('employee-list/', EmployeeList.as_view(), name="employee_list" ),
-    path("loginjwt/",   LoginView.as_view(),     name="jwt_login"),   # POST
+    
+    ##APIS FOR MY FRONTEND
+    
+    
+    path("loginjwt/",   LoginView.as_view(),  name="jwt_login"),   # POST
+    # http://127.0.0.1:8000/api/auth/loginjwt/
     path("refresh/", TokenRefreshView.as_view(), name="jwt_refresh"),
-    path("employees-list-api", EmployeeListAPI.as_view(), name="api_employees_list")
+    path("employees-list/", EmployeeListAPI.as_view(), name="employees_list_api"),
+    # http://127.0.0.1:8000/api/auth/employees-list-api
+    path("add-employee-api/", EmployeeCreateAPI.as_view(), name="add_employee_api")
+    #http://localhost:8000/api/auth/add-employee-api/
 ]
