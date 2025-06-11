@@ -9,11 +9,15 @@ from django.http import HttpResponseBadRequest
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import CustomTokenSerializer
+from .serializers import CustomTokenSerializer, EmployeeSerializer
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+
+
+from rest_framework.permissions import IsAuthenticated
+
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'
@@ -38,17 +42,6 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
         print(form.errors)  # Imprime los errores en consola para depuración
         return super().form_invalid(form)
 
-class EmployeeList(UserPassesTestMixin, ListView):
-    model = CustomerUser
-    template_name = 'users/employee_list.html'
-    context_object_name = 'employees'
-
-    def test_func(self):
-        return self.request.user.is_authenticated and self.request.user.is_manager()
-    
-    def get_queryset(self):
-        return CustomerUser.objects.exclude(role='admin')
-
 
 
 class LoginView(TokenObtainPairView):
@@ -65,3 +58,30 @@ class LoginView(TokenObtainPairView):
             return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EmployeeList(UserPassesTestMixin, ListView):
+    model = CustomerUser
+    template_name = 'users/employee_list.html'
+    context_object_name = 'employees'
+
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_manager()
+    
+    def get_queryset(self):
+        return CustomerUser.objects.exclude(role='admin')
+
+
+
+class EmployeeListAPI(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        if not user.is_manager():
+            return Response({"detail": "Permission denied"}, status=403)
+
+
+        employees = CustomerUser.objects.exclude(role="admin")
+        serializer = EmployeeSerializer(employees, many=True)
+        return Response(serializer.data)

@@ -146,9 +146,15 @@ LOGIN_URL = '/users/login/'
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
+    "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+        'rest_framework.authentication.SessionAuthentication',  # Esto permite login con sesión web
+        'rest_framework.authentication.BasicAuthentication',
+        # Si usas JWT: 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 
 AUTHENTICATION_BACKENDS = [
