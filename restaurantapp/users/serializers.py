@@ -48,3 +48,25 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'date_joined_restaurant',
                     'average_task_completed']
 
+class EmployeeCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerUser
+        fields = [  'email',
+                    'role',
+                    'phone_number',
+                    'avatar',
+                    'date_birth',
+                    'address',
+                    'notifications_enabled',
+                    'date_joined_restaurant',
+                    'average_task_completed']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+    
+    def create(self, validated_data):
+        # Usa create_user si tienes un método que maneje hashing de contraseña
+        validated_data['username'] = validated_data['email'].split('@')[0]
+        
+        user = CustomerUser.objects.create_user(**validated_data)
+        return user

@@ -9,7 +9,7 @@ from django.http import HttpResponseBadRequest
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import CustomTokenSerializer, EmployeeSerializer
+from .serializers import CustomTokenSerializer, EmployeeSerializer, EmployeeCreateSerializer
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -85,3 +85,19 @@ class EmployeeListAPI(APIView):
         employees = CustomerUser.objects.exclude(role="admin")
         serializer = EmployeeSerializer(employees, many=True)
         return Response(serializer.data)
+
+
+class EmployeeCreateAPI(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = EmployeeCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            employee = serializer.save()
+            return Response({"message": "Employee successfully created"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def perform_create(self, serializer):
+        if not self.request.user.is_manager():
+            raise PermissionDenied("Just admins can create employees")
+        serializer.save()

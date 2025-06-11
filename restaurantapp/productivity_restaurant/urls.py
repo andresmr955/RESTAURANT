@@ -26,7 +26,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('api/auth/', include('users.urls')),
     path('api/tasks/', include('tasks.urls')),
-    path('attendance/', include('attendance.urls'))
+    path('api/attendance/', include('attendance.urls'))
 ]
 
 
