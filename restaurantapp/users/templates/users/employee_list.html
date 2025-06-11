@@ -45,6 +45,7 @@
             <td>
             <a href="{% url 'tasks:task_list' employee.id %}">View Tasks</a>
             </td>
+            <td>{{ employee.id }}</td>
         </tr>
         {% empty %}
         <tr>

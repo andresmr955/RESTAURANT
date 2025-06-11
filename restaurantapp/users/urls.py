@@ -29,6 +29,7 @@ urlpatterns = [
     path("loginjwt/",   LoginView.as_view(),  name="jwt_login"),   # POST
     # http://127.0.0.1:8000/api/auth/loginjwt/
     path("refresh/", TokenRefreshView.as_view(), name="jwt_refresh"),
+    # http://127.0.0.1:8000/api/auth/refresh/
     path("employees/", EmployeeListCreateAPI.as_view(), name="employees_api"),
     # http://127.0.0.1:8000/api/auth/employees/
     path('employees/<int:pk>/', EmployeeDetailUpdateAPI.as_view(), name='employee-detail-update')

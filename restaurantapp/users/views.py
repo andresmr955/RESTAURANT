@@ -16,7 +16,11 @@ from rest_framework import status
 
 
 ##  Important Imports
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import (
+    ListCreateAPIView, 
+    RetrieveUpdateAPIView, 
+    RetrieveUpdateDestroyAPIView
+)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from .models import CustomerUser
@@ -38,7 +42,7 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
     model = CustomerUser
     form_class = EmployeeForm
     template_name = 'users/add_employee.html'
-    success_url = reverse_lazy('employee_list')
+    success_url = reverse_lazy('users:employee_list')
 
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_manager()
@@ -91,7 +95,7 @@ class EmployeeListCreateAPI(ListCreateAPIView):
             raise PermissionDenied("Only managers can create employees")
         serializer.save()
 
-class EmployeeDetailUpdateAPI(RetrieveUpdateAPIView):
+class EmployeeDetailUpdateAPI(RetrieveUpdateDestroyAPIView):
     queryset = CustomerUser.objects.all()
     serializer_class = EmployeeSerializer
     permission_classes = [IsAuthenticated]
@@ -99,6 +103,11 @@ class EmployeeDetailUpdateAPI(RetrieveUpdateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_manager() or user.is_chef():
+        if user.is_manager():
             return CustomerUser.objects.all()
         return CustomerUser.objects.none()
+
+    def destroy(self, request, *args, **kwargs):
+        if not request.user.is_manager():
+            raise PermissionDenied("Just managers can delete employees")
+        return super().destroy(request, *args, **kwargs)
