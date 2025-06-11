@@ -92,7 +92,7 @@ class EmployeeCreateAPI(APIView):
 
     def post(self, request):
         serializer = EmployeeCreateSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             employee = serializer.save()
             return Response({"message": "Employee successfully created"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
