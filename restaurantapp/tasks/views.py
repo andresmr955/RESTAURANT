@@ -2,32 +2,27 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, ListView, DetailView
-from .models import Task
-from .forms import TaskForm
 
 from django.utils import timezone
 from django.shortcuts import redirect
+from rest_framework import status
 
 from users.models import CustomerUser
+from .models import Task
+from .forms import TaskForm
 from .serializers import TaskSerializer
-
-from rest_framework import viewsets, permissions
-from drf_spectacular.utils import extend_schema
 
 class TaskCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create_task.html'
     success_url = reverse_lazy('tasks:create_task')  
-
    
     def test_func(self):
         user = self.request.user
         return user.is_authenticated and (user.is_manager() or user.is_chef())
 
- 
     def form_valid(self, form):
-       
         return super().form_valid(form)
 
 
@@ -72,8 +67,3 @@ class EmployeeTaskListView(ListView):
         context['employee'] = CustomerUser.objects.get(id=self.kwargs['employee_id'])
         return context
 
-@extend_schema(tags=["Tasks"])
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated] 
