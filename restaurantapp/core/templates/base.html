@@ -22,12 +22,12 @@
                     {% if user.is_cook or user.is_chef %}
                     <li><a href="{% url 'tasks:task_list' %}">Tasks</a></li>
                     {% endif %}
-                    <form method="post" action="{% url 'users:logout' %}">
+                    <form method="post" action="{% url 'my_auth:logout' %}">
                         {% csrf_token %}
                         <button type="submit">Logout</button>
                     </form>
                 {% else %}
-                    <li><a href="{% url 'users:jwt_login' %}">Sign in</a></li>
+                    <li><a href="{% url 'my_auth:jwt_login' %}">Sign in</a></li>
                 {% endif %}
             </ul>
         </nav>
