@@ -5,9 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class HomeView(TemplateView):
     template_name = 'base.html'
-
-    
-    
+ 
 class DashboardAdminView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = "admin_dashboard.html"
 
