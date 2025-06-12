@@ -53,7 +53,7 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
         return super().form_invalid(form)
 
 
-
+@extend_schema(tags=["UsersLogin"])
 class LoginView(TokenObtainPairView):
     serializer_class = CustomTokenSerializer
 

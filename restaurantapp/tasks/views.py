@@ -12,6 +12,7 @@ from users.models import CustomerUser
 from .serializers import TaskSerializer
 
 from rest_framework import viewsets, permissions
+from drf_spectacular.utils import extend_schema
 
 class TaskCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Task
@@ -71,8 +72,7 @@ class EmployeeTaskListView(ListView):
         context['employee'] = CustomerUser.objects.get(id=self.kwargs['employee_id'])
         return context
 
-
-
+@extend_schema(tags=["Tasks"])
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
