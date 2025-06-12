@@ -33,7 +33,7 @@ urlpatterns = [
     path("employees/", EmployeeListCreateAPI.as_view(), name="employees_api"),
     # http://127.0.0.1:8000/api/auth/employees/
     path('employees/<int:pk>/', EmployeeDetailUpdateAPI.as_view(), name='employee-detail-update')
-    # http://127.0.0.1:8000/api/auth/employees/employees/<int:id>/
+    # http://127.0.0.1:8000/api/auth/employees/<int:id>/
 
   
 ]

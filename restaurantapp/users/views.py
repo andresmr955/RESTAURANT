@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
+from drf_spectacular.utils import extend_schema
 
 
 ##  Important Imports
@@ -80,8 +81,11 @@ class EmployeeList(UserPassesTestMixin, ListView):
     def get_queryset(self):
         return CustomerUser.objects.exclude(role='admin')
 
-
+@extend_schema(tags=["Users"])
 class EmployeeListCreateAPI(ListCreateAPIView):
+    """
+    Get the list of employees or create employees
+    """
     permission_classes = [IsAuthenticated]
     queryset = CustomerUser.objects.all()
 
@@ -95,6 +99,7 @@ class EmployeeListCreateAPI(ListCreateAPIView):
             raise PermissionDenied("Only managers can create employees")
         serializer.save()
 
+@extend_schema(tags=["Users"])
 class EmployeeDetailUpdateAPI(RetrieveUpdateDestroyAPIView):
     queryset = CustomerUser.objects.all()
     serializer_class = EmployeeSerializer
