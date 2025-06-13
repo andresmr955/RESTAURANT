@@ -39,10 +39,10 @@ Create a web application to manage employees in a restaurant, record work time a
 | Area          | Tool          |
 |---------------|----------------------|
 | Backend       | Python (Flask)       |
-| Frontend      | HTML, CSS, Bootstrap |
+| Frontend      | HTML, CSS, Bootstrap, Angular |
 | Database      | SQLite (Then PostgreSQL) |
-| Login         | Flask-Login          |
-| Security      | Werkzeug Security    |
+| Login         | Django-Login          |
+| Security      | Django Hashers Security    |
 | Deployment    | (Future) Render o Heroku |
 
 ---
