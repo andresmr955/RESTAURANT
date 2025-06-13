@@ -46,36 +46,36 @@ This project was conceived as a professional example intended both to complete a
 
 #### Authentication and User Management
 
-* JWT Authentication.
-* Creation, updating, and deletion of employees.
-* Filtering according to user role.
-* Private API, protected under specific authentications and permissions.
+- JWT Authentication.
+- Creation, updating, and deletion of employees.
+- Filtering according to user role.
+- Private API, protected under specific authentications and permissions.
 
 #### Task Management
 
-* Listing, creation, updating, and deletion of tasks.
-* Filtering of tasks according to the assigned employee.
-* Custom actions to start or finish tasks.
-* API Endpoints (example)
+- Listing, creation, updating, and deletion of tasks.
+- Filtering of tasks according to the assigned employee.
+- Custom actions to start or finish tasks.
+- API Endpoints (example)
 
 ### API Endpoint
 
 #### ✅ Users
 
-* POST /api/users/login/
-* POST /api/users/ (create new)
-* GET /api/users/
-* GET /api/users/{id}/
-* PUT/PATCH/DELETE /api/users/{id}/
+- POST /api/users/login/
+- POST /api/users/ (create new)
+- GET /api/users/
+- GET /api/users/{id}/
+- PUT/PATCH/DELETE /api/users/{id}/
 
 #### ✅ Tasks
 
-* POST /api/tasks/
-* GET /api/tasks/
-* GET /api/tasks/{id}/
-* PUT/PATCH/DELETE /api/tasks/{id}/
-* POST /api/tasks/{id}/start/
-* POST /api/tasks/{id}/stop/
+- POST /api/tasks/
+- GET /api/tasks/
+- GET /api/tasks/{id}/
+- PUT/PATCH/DELETE /api/tasks/{id}/
+- POST /api/tasks/{id}/start/
+- POST /api/tasks/{id}/stop/
 
 ### Featured Technical Implementations
 
@@ -87,9 +87,9 @@ This project was conceived as a professional example intended both to complete a
 
 ### Future Implementations
 
-* Implement productivity reports.
-* Implement concurrency for handling high-performance tasks.
-* Implement an analytics panel for administrators.
+- Implement productivity reports.
+- Implement concurrency for handling high-performance tasks.
+- Implement an analytics panel for administrators.
 
 ## Installation Guide (development)
 
