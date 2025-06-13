@@ -17,7 +17,7 @@ class EmployeeCreateView(UserPassesTestMixin, CreateView):
         return self.request.user.is_authenticated and self.request.user.is_manager()
 
     def form_invalid(self, form):
-        print(form.errors)  # Imprime los errores en consola para depuración
+        print(form.errors)  
         return super().form_invalid(form)
 
 
