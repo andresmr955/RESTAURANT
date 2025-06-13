@@ -46,7 +46,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     # Detail Action
     # URL: /api/users/{id}/send_notification/
-    @action(methods=['POST'], detail=True)
+    @action(methods=['POST'], detail=True, url_path=('set-on-notifications'))
     def send_on_notification(self, request, pk=None):
         """
         Activated a notification to a user in specific
@@ -56,7 +56,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         user.save()
         return response.Response({'status': f'User notification activated'})
 
-    @action(methods=['POST'], detail=True)
+    @action(methods=['POST'], detail=True, url_path=('set-off-notifications'))
     def send_off_notification(self, request, pk=None):
         """
         Deactivated a notification to a user in specific
@@ -69,7 +69,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     # Set Action 
     # URL: /api/users/send_notification_all/
-    @action(methods=['POST'], detail=False)
+    @action(methods=['POST'], detail=False, url_path=('set-on-notifications-all'))
     def send_on_notification_all(self, request):
         """
             Activations notifications to everyone
@@ -81,7 +81,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             user.save()
         return response.Response({'status': f'Notifications activated all'})
 
-    @action(methods=['POST'], detail=False)
+    @action(methods=['POST'], detail=False, url_path=('set-off-notifications-all'))
     def send_off_notification_all(self, request):
         """
             Deactivation notifications to everyone
