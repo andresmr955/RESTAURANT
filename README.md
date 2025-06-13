@@ -9,13 +9,13 @@ This project was conceived as a professional example intended both to complete a
 
 ### Technology used
 
-✅ Python/Django (Django Rest Framework) — API back-end
-✅ Postgres — relational database
-✅ JSON Web Token (SimpleJWT) — authentication
-✅ drf_spectacular — API schema generation (OpenAPI)
-✅ Angular — frontend application (SPA)
-✅ Docker (optional) — containerization
-✅ Render (optional) — cloud deployment without AWS (more economical)
+✅ Python/Django (Django Rest Framework) — API back-end <br>
+✅ Postgres — relational database <br>
+✅ JSON Web Token (SimpleJWT) — authentication <br>
+✅ drf_spectacular — API schema generation (OpenAPI) <br>
+✅ Angular — frontend application (SPA) <br>
+✅ Docker (optional) — containerization <br>
+✅ Render (optional) — cloud deployment without AWS (more economical) <br>
 
 ### Project Structure
 
@@ -80,11 +80,11 @@ RestaurantApp/
 
 ### Featured Technical Implementations
 
-✅ ModelViewSet to unify endpoints into a single view
-✅ Custom Actions (@action) in the ViewSet for task start/stop
-✅ drf_spectacular for API schema
-✅ Separation of responsibilities: tasks application and users application
-✅ Classification of responsibilities: each application has its own models, serializers, views, urls.
+✅ ModelViewSet to unify endpoints into a single view <br>
+✅ Custom Actions (@action) in the ViewSet for task start/stop <br>
+✅ drf_spectacular for API schema<br>
+✅ Separation of responsibilities: tasks application and users application<br>
+✅ Classification of responsibilities: each application has its own models, serializers, views, urls. <br>
 
 ### Future Implementations
 
@@ -96,7 +96,7 @@ RestaurantApp/
 
 1. Clone the repository:
 
-> `git clone` [Link text](https://github.com/your-user/restaurantapp.git)<br>
+> `git clone` [Link text](https://github.com/your-user/restaurantapp.git) <br>
 > `cd restaurantapp`
 
 2. Load the virtual environment:
