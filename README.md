@@ -20,7 +20,7 @@ This project was conceived as a professional example intended both to complete a
 ### Project Structure
 
 1. RestaurantApp/
-    - └ src/
+    └ src/
         - └ restaurantapp/
         - └ restaurantapp/
             - └ settings.py
