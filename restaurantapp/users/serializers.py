@@ -19,6 +19,26 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'date_joined_restaurant',
                     'average_task_completed']
 
+    def validate_email(self, value):
+        if "@email.com" in value:
+            return value
+        raise serializers.ValidationError("The email should include @email.com")
+
+    def validate(self, attrs):
+        notifications_enabled = attrs.get('notifications_enabled', getattr(self.instance, 'notifications_enabled', False))
+        phone_number = attrs.get('phone_number', getattr(self.instance, 'phone_number', '') or '')
+
+        phone_number = str(phone_number)
+
+        if notifications_enabled:
+            if not phone_number.isdigit():
+                raise serializers.ValidationError("The number should ony contain numbers.")
+            if len(phone_number) < 10:
+                raise serializers.ValidationError("The number should contain at least 10 numbers if notifications are active.")
+        
+        return attrs
+        
+
 class EmployeeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUser
@@ -43,6 +63,20 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
         return user
 
     def validate_email(self, value):
-        if "@email.com" == value:
+        if "@email.com" in value:
             return value
         raise serializers.ValidationError("The email should include @email.com")
+
+    def validate(self, attrs):
+            notifications_enabled = attrs.get('notifications_enabled', getattr(self.instance, 'notifications_enabled', False))
+            phone_number = attrs.get('phone_number', getattr(self.instance, 'phone_number', '') or '')
+
+            phone_number = str(phone_number)
+
+            if notifications_enabled:
+                if not phone_number.isdigit():
+                    raise serializers.ValidationError("The number should ony contain numbers.")
+                if len(phone_number) < 10:
+                    raise serializers.ValidationError("The number should contain at least 10 numbers if notifications are active.")
+            
+            return attrs
