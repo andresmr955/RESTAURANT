@@ -47,20 +47,30 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     # Detail Action
     # URL: /api/users/{id}/send_notification/
     @action(methods=['POST'], detail=True)
-    def send_notification(self, request, pk=None):
+    def send_on_notification(self, request, pk=None):
         """
-        Send a notification to a user in specific
+        Activated a notification to a user in specific
         """ 
         user = self.get_object()
-        # Implementa aquí el envío de la notificación
-        # Por ejemplo:
-        # notification_service.send(user)
-        return response.Response({'status': f'Notification send to {user.email}'})
+        user.notifications_enabled = True
+        user.save()
+        return response.Response({'status': f'User notification activated'})
 
+    @action(methods=['POST'], detail=True)
+    def send_off_notification(self, request, pk=None):
+        """
+        Deactivated a notification to a user in specific
+        """ 
+        user = self.get_object()
+        user.notifications_enabled = False
+        user.save()
+        return response.Response({'status': f'User notification deactivated'})
+
+        
     # Set Action 
     # URL: /api/users/send_notification_all/
     @action(methods=['POST'], detail=False)
-    def send_notification_all(self, request):
+    def send_on_notification_all(self, request):
         """
             Send one notification to everyone
         """
