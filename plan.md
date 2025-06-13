@@ -69,7 +69,7 @@ requirements.txt # Dependencies
 - name (string)
 - email (string, unique)
 - password (hashed)
-- rol (string: 'admin' o 'employee')
+- rol (string: 'admin', 'employee', 'sous-chef')
 
 ### 📋 Task
 
@@ -84,3 +84,19 @@ requirements.txt # Dependencies
 ---
 
 ## 📅 Next steps
+
+✅ Implement Custom Actions in DRF ViewSets (with @action)  
+✅ Implement Authentication and Authorization with JWT  
+✅ Add Custom Validations in Serializers  
+✅ Develop Advanced Serializers (Nested, Method Fields, etc)  
+✅ Implement Nested Serializers for related models  
+✅ Calculate Age or Experience with Serializer Method Field  
+✅ Create and Manage Medical Appointment Endpoints  
+✅ Write Unit Tests with APIClient to validate API functionality  
+✅ Apply Rate Throttling to limit API requests per user  
+
+## 🔹 Additional Actions
+
+✅ Learn Angular (Create a simple CRUD UI to consume your API)
+✅ Containerize Django + Angular with Docker Compose
+✅ Deploy your application to Render (Docker + Database + Frontend)
