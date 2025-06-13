@@ -1,31 +1,23 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+
 from .views import (
     EmployeeCreateView, 
-    EmployeeList, 
-
-    EmployeeListCreateAPI, 
-    EmployeeDetailUpdateAPI
+    EmployeeList,
     )
 
+from .viewsets import EmployeeViewSet
 
 app_name = 'users'
 
+router = DefaultRouter()
+router.register(r'employees-actions', EmployeeViewSet, basename='employees')
+
 urlpatterns = [
-   
-   
+
         #URLS TO PROVE MY MODELS
     path('add-employee/', EmployeeCreateView.as_view(), name="add-employee"),
     path('employee-list/', EmployeeList.as_view(), name="employee_list" ),
-    
 
-
-    ##APIS FOR MY FRONTEND
-  
-    
-    path("employees/", EmployeeListCreateAPI.as_view(), name="employees_api"),
-    # http://127.0.0.1:8000/api/auth/employees/
-    path('employees/<int:pk>/', EmployeeDetailUpdateAPI.as_view(), name='employee-detail-update')
-    # http://127.0.0.1:8000/api/auth/employees/<int:id>/
-
-  
-]
+ 
+] + router.urls
