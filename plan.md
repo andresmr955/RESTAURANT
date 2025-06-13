@@ -97,6 +97,6 @@ requirements.txt # Dependencies
 
 ## 🔹 Additional Actions
 
-✅ Learn Angular (Create a simple CRUD UI to consume your API)
-✅ Containerize Django + Angular with Docker Compose
-✅ Deploy your application to Render (Docker + Database + Frontend)
+✅ Learn Angular (Create a simple CRUD UI to consume your API)  
+✅ Containerize Django + Angular with Docker Compose  
+✅ Deploy your application to Render (Docker + Database + Frontend)  
