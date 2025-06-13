@@ -22,7 +22,6 @@ This project was conceived as a professional example intended both to complete a
 1. RestaurantApp/
     - └ src/
         - └ restaurantapp/
-        - └ restaurantapp/
             - └ settings.py
             - └ urls.py
             - └ asgi.py
