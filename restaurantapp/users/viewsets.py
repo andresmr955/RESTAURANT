@@ -66,19 +66,17 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         user.save()
         return response.Response({'status': f'User notification deactivated'})
 
-        
+
     # Set Action 
     # URL: /api/users/send_notification_all/
     @action(methods=['POST'], detail=False)
     def send_on_notification_all(self, request):
         """
-            Send one notification to everyone
+            Activations notifications to everyone
         """
-
         users = CustomerUser.objects.all()
 
         for user in users:
-            # Implementa aquí el envío de la notificación
-            # notification_service.send(user)
-            pass
-        return response.Response({'status': f'Notifications send to everyone.'})
+            user.notifications_enabled = True
+            user.save()
+        return response.Response({'status': f'Notifications activated all'})
