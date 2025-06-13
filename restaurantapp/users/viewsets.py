@@ -36,7 +36,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         if not self.request.user.is_manager():
-            raise PermissionDenied("Only managers can crete employees")
+            raise PermissionDenied("Only managers can create employees")
         serializer.save()
 
     def destroy(self, request, *args, **kwargs):
