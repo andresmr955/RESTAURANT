@@ -7,6 +7,7 @@ from rest_framework.exceptions import PermissionDenied
 
 from .models import CustomerUser
 from .serializers import EmployeeSerializer, EmployeeCreateSerializer
+from .permissions import IsManager
 
 @extend_schema(tags=["Users"])
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -16,7 +17,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     """
     queryset = CustomerUser.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
     lookupfield = 'pk'
 
     def get_serializer_class(self):
