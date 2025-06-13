@@ -8,7 +8,9 @@ from rest_framework import serializers
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUser
-        fields = [  'role',
+        fields = [  
+                    'role',
+                    'email',
                     'phone_number',
                     'avatar',
                     'date_birth',
@@ -39,3 +41,8 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
 
         user = CustomerUser.objects.create_user(**validated_data)
         return user
+
+    def validate_email(self, value):
+        if "@email.com" == value:
+            return value
+        raise serializers.ValidationError("The email should include @email.com")
