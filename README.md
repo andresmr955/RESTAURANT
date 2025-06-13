@@ -96,8 +96,8 @@ RestaurantApp/
 
 1. Clone the repository:
 
-```git clone [Link text](https://github.com/your-user/restaurantapp.git)
-cd restaurantapp```
+> `git clone` [Link text](https://github.com/your-user/restaurantapp.git)
+> `cd restaurantapp`
 
 2. Load the virtual environment:
 python -m venv venv
