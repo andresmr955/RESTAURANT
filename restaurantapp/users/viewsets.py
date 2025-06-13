@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, response
+from rest_framework.decorators import action
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
@@ -42,3 +43,32 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         if not request.user.is_manager():
             raise PermissionDenied("Just managers can delete employees")
         return super().destroy(request, *args, **kwargs)
+
+    # Detail Action
+    # URL: /api/users/{id}/send_notification/
+    @action(methods=['POST'], detail=True)
+    def send_notification(self, request, pk=None):
+        """
+        Send a notification to a user in specific
+        """ 
+        user = self.get_object()
+        # Implementa aquí el envío de la notificación
+        # Por ejemplo:
+        # notification_service.send(user)
+        return response.Response({'status': f'Notification send to {user.email}'})
+
+    # Set Action 
+    # URL: /api/users/send_notification_all/
+    @action(methods=['POST'], detail=False)
+    def send_notification_all(self, request):
+        """
+            Send one notification to everyone
+        """
+
+        users = CustomerUser.objects.all()
+
+        for user in users:
+            # Implementa aquí el envío de la notificación
+            # notification_service.send(user)
+            pass
+        return response.Response({'status': f'Notifications send to everyone.'})
