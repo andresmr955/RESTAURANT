@@ -9,13 +9,13 @@ This project was conceived as a professional example intended both to complete a
 
 ### Technology used
 
-✅ Python/Django (Django Rest Framework) — API back-end <br>
-✅ Postgres — relational database <br>
-✅ JSON Web Token (SimpleJWT) — authentication <br>
-✅ drf_spectacular — API schema generation (OpenAPI) <br>
-✅ Angular — frontend application (SPA) <br>
-✅ Docker (optional) — containerization <br>
-✅ Render (optional) — cloud deployment without AWS (more economical) <br>
+✅ Python/Django (Django Rest Framework) — API back-end  
+✅ Postgres — relational database  
+✅ JSON Web Token (SimpleJWT) — authentication  
+✅ drf_spectacular — API schema generation (OpenAPI)  
+✅ Angular — frontend application (SPA)  
+✅ Docker (optional) — containerization  
+✅ Render (optional) — cloud deployment without AWS (more economical)  
 
 ### Project Structure
 
@@ -90,7 +90,6 @@ RestaurantApp/
 
 ✅ Classification of responsibilities: each application has its own models, serializers, views, urls  
 
-
 ### Future Implementations
 
 * Implement productivity reports.
@@ -101,7 +100,7 @@ RestaurantApp/
 
 1. Clone the repository:
 
-> `git clone` [Link text](https://github.com/your-user/restaurantapp.git) <br>
+> `git clone` [Link text](https://github.com/your-user/restaurantapp.git)  
 > `cd restaurantapp`
 
 2. Load the virtual environment:
