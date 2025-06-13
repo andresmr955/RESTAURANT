@@ -19,29 +19,29 @@ This project was conceived as a professional example intended both to complete a
 
 ### Project Structure
 
-RestaurantApp/  
- └ src/  
-    └ restaurantapp/  
-       └ restaurantapp/  
-          └ settings.py  
-          └ urls.py  
-          └ asgi.py  
-          └ wsgi.py  
-       └ users/  
-          └ models.py  
-          └ serializers.py  
-          └ views.py  
-          └ urls.py  
-       └ tasks/  
-          └ models.py  
-          └ serializers.py  
-          └ views.py  
-          └ urls.py  
- └ frontend/  
-    └ angular-frontend/  
- └ manage.py  
- └ requirements.txt  
- └README.md  
+1. RestaurantApp/
+    - └ src/
+        - └ restaurantapp/
+        - └ restaurantapp/
+            - └ settings.py
+            - └ urls.py
+            - └ asgi.py
+            - └ wsgi.py
+        - └ users/
+            - └ models.py
+            - └ serializers.py
+            - └ views.py
+            - └ urls.py
+        - └ tasks/
+            - └ models.py
+            - └ serializers.py
+            - └ views.py
+            - └ urls.py
+    - └ frontend/
+        - └ angular-frontend/
+    - └ manage.py
+    - └ requirements.txt
+    - └README.md
 
 ### Main Features
 
