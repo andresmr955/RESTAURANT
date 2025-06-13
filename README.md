@@ -80,11 +80,16 @@ RestaurantApp/
 
 ### Featured Technical Implementations
 
-✅ ModelViewSet to unify endpoints into a single view <br>
-✅ Custom Actions (@action) in the ViewSet for task start/stop <br>
-✅ drf_spectacular for API schema<br>
-✅ Separation of responsibilities: tasks application and users application<br>
-✅ Classification of responsibilities: each application has its own models, serializers, views, urls. <br>
+✅ ModelViewSet to unify endpoints into a single view  
+
+✅ Custom Actions (@action) in the ViewSet for task start/stop  
+
+✅ drf_spectacular for API schema  
+
+✅ Separation of responsibilities: tasks application and users application  
+
+✅ Classification of responsibilities: each application has its own models, serializers, views, urls  
+
 
 ### Future Implementations
 
@@ -100,25 +105,24 @@ RestaurantApp/
 > `cd restaurantapp`
 
 2. Load the virtual environment:
-python -m venv venv
-source venv/bin/activate
+> ` python -m venv venv`
+> `source venv/bin/activate`
 
 3. Install dependencies:
-pip install -r requirements.txt
-
+ > `pip install -r requirements.txt`
 
 4. Perform the migrations::
-python manage.py migrate
-
+ > `python manage.py migrate`
 
 5. Start the development server:
 
-python manage.py runserver
-
+ > `python manage.py runserver`
 
 ## Contact
+
 If you want more information or are interested in hiring me, contact me at:
 ✅ LinkedIn
 ✅ Portfolio
 ✅ Github
+
 Thank you for reading! ❤️
