@@ -24,6 +24,7 @@ from users import views
 urlpatterns = [
    
     path('admin/', admin.site.urls),
+    path('api-auth-admin/', include('rest_framework.urls')),
     path('', include('docs.urls')),
     path('core/', include('core.urls')),
     path('api/auth/', include('my_auth.urls')),
