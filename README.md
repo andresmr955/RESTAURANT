@@ -37,7 +37,7 @@ This project was conceived as a professional example intended both to complete a
             - └ serializers.py
             - └ views.py
             - └ urls.py
-    - └ frontend/
+    - └ frontend
         - └ angular-frontend/
     - └ manage.py
     - └ requirements.txt

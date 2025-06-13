@@ -1,91 +1,86 @@
-# 🧠 Plan del Proyecto: Sistema de Gestión de Tareas para Restaurante
+# 🧠 Project Plan: Task Management System for a Restaurant
 
-## 🎯 Objetivo General
-Crear una aplicación web para gestionar empleados en un restaurante, registrar el tiempo de trabajo y asignar tareas por parte de un administrador.
+## 🎯 General Objective
 
----
-
-## 👥 Roles de Usuario
-
-### 👤 Administrador
-- Crear cuentas de empleados.
-- Asignar tareas a empleados.
-- Ver historial de tareas completadas.
-- Medir productividad con base en tiempos.
-
-### 👨‍🍳 Empleado
-- Iniciar sesión.
-- Ver tareas asignadas.
-- Marcar tareas como completadas.
-- Registrar hora de inicio y fin por tarea.
+Create a web application to manage employees in a restaurant, record work time and assign tasks by an administrator.General Objective.
 
 ---
 
-## ✅ Funcionalidades MVP (Producto Mínimo Viable)
+## 👥 User Roles
 
-- [ ] Registro e inicio de sesión seguro.
-- [ ] Panel de control diferente para admin y empleado.
-- [ ] Asignación y visualización de tareas.
-- [ ] Registro de tiempo trabajado.
-- [ ] Reporte de productividad.
+### 👤 Administrator
+
+- Create employee accounts.
+- Assign tasks to employees.
+- View history of completed tasks.
+- Measure productivity based on time.
+
+### 👨‍🍳 Employee
+
+- Log in.
+- View assigned tasks.
+- Mark tasks as completed.
+- Record start and end time per task.
 
 ---
 
-## 🛠️ Tecnologías
+## ✅ MVP (Minimum Viable Product) Functionalities
 
-| Área          | Herramienta          |
+- [ ] Secure registration and login.
+- [ ] Different control panel for admin and employee.
+- [ ] Assignment and visualization of tasks.
+- [ ] Worked time registration.
+- [ ] Productivity report.
+
+---
+
+## 🛠️ Technologies
+
+| Area          | Tool          |
 |---------------|----------------------|
 | Backend       | Python (Flask)       |
 | Frontend      | HTML, CSS, Bootstrap |
-| Base de Datos | SQLite (luego PostgreSQL) |
+| Database      | SQLite (Then PostgreSQL) |
 | Login         | Flask-Login          |
-| Seguridad     | Werkzeug Security    |
-| Despliegue    | (Futuro) Render o Heroku |
+| Security      | Werkzeug Security    |
+| Deployment    | (Future) Render o Heroku |
 
 ---
 
-## 🗂️ Estructura del Proyecto
+## 🗂️ Project Structure
 
 /app
-/static # Archivos CSS, JS
-/templates # Archivos HTML
-init.py # Inicialización de Flask
-models.py # Modelos de SQLAlchemy
-routes.py # Rutas del servidor
-forms.py # Formularios WTForms (opcional)
-config.py # Configuración general
-run.py # Punto de entrada principal
-requirements.txt # Dependencias
-
-
+/static # files CSS, JS
+/templates # files HTML
+init.py # Initialization of Django
+models.py # Models de SQLAlchemy
+urls.py # Server routes
+forms.py # Forms WTForms (optional)
+config.py # General configuration
+requirements.txt # Dependencies
 
 ---
 
-## 🧮 Diseño de Base de Datos (Modelo inicial)
+## 🧮 Database Design (Initial Model)
 
-### 🧑 Usuario
+### 🧑 User
+
 - id (int, PK)
-- nombre (string)
-- email (string, único)
+- name (string)
+- email (string, unique)
 - password (hashed)
-- rol (string: 'admin' o 'empleado')
+- rol (string: 'admin' o 'employee')
 
-### 📋 Tarea
+### 📋 Task
+
 - id (int, PK)
-- título (string)
-- descripción (text)
-- asignada_a (FK a Usuario)
-- estado (string: pendiente, en progreso, completada)
-- tiempo_inicio (datetime)
-- tiempo_fin (datetime)
+- title (string)
+- description (text)
+- assigned_to (FK a user)
+- assigned (string: pending, in progress, completed)
+- time_start (datetime)
+- time_end (datetime)
 
 ---
 
-## 📅 Próximos pasos
-
-1. [ ] Crear entorno virtual e instalar Flask.
-2. [ ] Configurar archivo `__init__.py` con la app Flask.
-3. [ ] Definir modelos en `models.py`.
-4. [ ] Crear base de datos inicial.
-5. [ ] Implementar registro e inicio de sesión.
-
+## 📅 Next steps
