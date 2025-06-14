@@ -2,10 +2,11 @@ from django.contrib.auth import authenticate
 from rest_framework import exceptions
 from .models import CustomerUser
 from rest_framework import serializers
-
-
+from tasks.serializers import TaskSerializer
 
 class EmployeeSerializer(serializers.ModelSerializer):
+
+    tasks = TaskSerializer(many=True, read_only=True)
     class Meta:
         model = CustomerUser
         fields = [  
@@ -17,7 +18,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'address',
                     'notifications_enabled',
                     'date_joined_restaurant',
-                    'average_task_completed']
+                    'average_task_completed',
+                    'tasks'
+                    ]
 
     def validate_email(self, value):
         if "@email.com" in value:
@@ -80,3 +83,6 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
                     raise serializers.ValidationError("The number should contain at least 10 numbers if notifications are active.")
             
             return attrs
+
+
+

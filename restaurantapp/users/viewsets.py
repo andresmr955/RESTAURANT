@@ -17,6 +17,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     """
     queryset = CustomerUser.objects.all()
+    serializer_class = EmployeeSerializer
     permission_classes = [IsAuthenticated, IsManager]
     lookupfield = 'pk'
 
