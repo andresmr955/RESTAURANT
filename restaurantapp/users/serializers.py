@@ -41,6 +41,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         
         return attrs
         
+    
 
 class EmployeeCreateSerializer(serializers.ModelSerializer):
     class Meta:
