@@ -33,7 +33,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
         user = self.request.user
         if user.is_manager():
-            return CustomerUser.objects.all()
+            return CustomerUser.objects.all().prefetch_related('tasks')
         return CustomerUser.objects.none()
 
     def perform_create(self, serializer):
