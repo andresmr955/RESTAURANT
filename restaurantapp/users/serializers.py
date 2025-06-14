@@ -23,7 +23,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'average_task_completed',
                     'tasks',
                     'tasks_completed_count',
-                    ]
+                ]
 
     def validate_email(self, value):
         if "@email.com" in value:
