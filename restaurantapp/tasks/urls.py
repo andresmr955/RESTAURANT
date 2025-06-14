@@ -14,7 +14,7 @@ router.register("tasks", TaskViewSet)
 
 urlpatterns = [
     path('create/', TaskCreateView.as_view(), name='create_task'),
-    path('tasks/', TaskListView.as_view(), name='task_list'),
+    path('tasks-html/', TaskListView.as_view(), name='task_list'),
     path('task-detail/<int:pk>', TaskDetailView.as_view(), name='task_detail'),
     path('employee/<int:employee_id>/', EmployeeTaskListView.as_view(), name='task_list'),
   
