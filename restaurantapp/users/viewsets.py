@@ -4,10 +4,12 @@ from rest_framework.decorators import action
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.response import Response
 
 from .models import CustomerUser
 from .serializers import EmployeeSerializer, EmployeeCreateSerializer
 from .permissions import IsManager
+from tasks.serializers import TaskSerializer 
 
 @extend_schema(tags=["Users"])
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -94,3 +96,6 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             user.notifications_enabled = False
             user.save()
         return response.Response({'status': f'Notifications deactivated all'})
+
+    
+    

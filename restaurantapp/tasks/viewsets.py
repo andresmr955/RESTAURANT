@@ -14,6 +14,21 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated] 
 
+    def perform_create(self, serializer):
+        """
+            Here we can implement that only the manager can create tasks.
+
+        """
+        if not self.request.user.is_manager():
+            raise PermissionDenied("Only managers can create employees")
+        serializer.save()
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        assigned_employee = self.request.query_params.get('assigned_employee')
+        if assigned_employee:
+            queryset = queryset.filter(assigned_employee=assigned_employee)
+        return queryset
 
     @action(detail=True, methods=['post'])
     def start(self, request, pk=None):
@@ -30,3 +45,8 @@ class TaskViewSet(viewsets.ModelViewSet):
             task.end_time = timezone.now()
             task.save()
         return Response({'status': 'stopped'})
+
+   
+    
+
+    
