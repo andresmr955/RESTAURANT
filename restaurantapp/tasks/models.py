@@ -22,7 +22,6 @@ class Task(models.Model):
     assigned_date = models.DateTimeField(auto_now_add=True)
     start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
-    
     comments = models.TextField(blank=True, null=True)
 
     def total_time_minutes(self):

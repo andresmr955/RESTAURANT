@@ -48,6 +48,7 @@ class TaskDetailView(DetailView):
             task.start_time = timezone.now()
             task.save()
         elif action == 'stop' and task.start_time and not task.end_time:
+            task.status = "completed"
             task.end_time = timezone.now()
             task.save()
 
