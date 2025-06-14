@@ -5,12 +5,14 @@ from rest_framework import serializers
 from tasks.serializers import TaskSerializer
 
 class EmployeeSerializer(serializers.ModelSerializer):
+    tasks_completed_count = serializers.SerializerMethodField()
 
     tasks = TaskSerializer(many=True, read_only=True)
     class Meta:
         model = CustomerUser
         fields = [  
                     'role',
+                    'username',
                     'email',
                     'phone_number',
                     'avatar',
@@ -19,7 +21,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
                     'notifications_enabled',
                     'date_joined_restaurant',
                     'average_task_completed',
-                    'tasks'
+                    'tasks',
+                    'tasks_completed_count',
                     ]
 
     def validate_email(self, value):
@@ -41,7 +44,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
         
         return attrs
         
-    
+    def get_tasks_completed_count(self, obj):
+        return obj.tasks.filter(status='completed').count()
 
 class EmployeeCreateSerializer(serializers.ModelSerializer):
     class Meta:
