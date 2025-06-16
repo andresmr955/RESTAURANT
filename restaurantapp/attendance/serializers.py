@@ -16,7 +16,7 @@ class AttendanceSerializer(serializers.ModelSerializer):
         model = Attendance
         fields = ['id', 'assigned_employee_id', 'login_start', 'login_end', 'total_hours']
 
-        read_only_fields = ['id', 'date_login']
+        read_only_fields = ['id', 'date_login', 'login_start', 'login_end', 'total_hours']
 
     # Optional validations
     def validate(self, data):
@@ -24,11 +24,4 @@ class AttendanceSerializer(serializers.ModelSerializer):
         login_end = data.get('login_end')
         if login_start and login_end and login_end <= login_start:
             raise serializers.ValidationError("The end time must be later than the start time.")
-        return data
-        
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        print(f"login_end value: {instance.login_end}")  # para debug
-        if not instance.login_end:
-            data.pop('login_end', None)
         return data
