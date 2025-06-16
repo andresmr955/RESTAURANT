@@ -5,10 +5,10 @@ from users.models import CustomerUser
 
 class AttendanceModelTest(TestCase):
     def setUp(self):
-        # Creamos un usuario de prueba
+        # We create a test user
         self.user = CustomerUser.objects.create_user(username='testuser', password='secret')
 
-        # Creamos una asistencia de prueba
+        # We create a test assistance
         self.attendance = Attendance.objects.create(
             assigned_employee = self.user,
             date_login = datetime(2025, 6, 16).date(), 
@@ -17,7 +17,7 @@ class AttendanceModelTest(TestCase):
         )
 
     def test_total_horas(self):
-        """Prueba que total_horas calcule correctamente el total de horas trabajadas."""
+        """Test that total_hours correctly calculates the total hours worked"""
         self.attendance.login_start = datetime(2025, 6, 16, 8, 0)
         self.attendance.login_end = datetime(2025, 6, 16, 16, 0)
         self.attendance.save()
