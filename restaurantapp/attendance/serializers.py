@@ -4,14 +4,15 @@ from rest_framework import serializers
 from .models import Attendance
 
 class AttendanceSerializer(serializers.ModelSerializer):
+    total_hours = serializers.ReadOnlyField()
     class Meta:
         model = Attendance
-        fields = ['id', 'assigned_employee', 'login_start', 'login_end']
+        fields = ['id', 'assigned_employee', 'login_start', 'login_end', 'total_hours']
 
         read_only_fields = ['id', 'assigned_employee']
 
-    # Validaciones opcionales
+    # Optional validations
     def validate(self, data):
         if data['end'] <= data['start']:
-            raise serializers.ValidationError("La hora de fin debe ser posterior a la hora de inicio.")
+            raise serializers.ValidationError("The end time must be later than the start time.")
         return data

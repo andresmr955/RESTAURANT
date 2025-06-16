@@ -62,7 +62,7 @@ class TaskModelTest(TestCase):
         self.assertEqual(task.assigned_employee, self.employee)
         self.assertEqual(str(task), f"Test task for {self.employee.username}")
 
-    def test_task_total_time(self):
+    def test_task_total_time_minutes(self):
         start_time = timezone.now()
         end_time = start_time + timedelta(hours=2)
 
@@ -77,7 +77,7 @@ class TaskModelTest(TestCase):
 
         task.refresh_from_db()
 
-        total_time = task.total_time()
+        total_time = task.total_time_minutes()
         self.assertIsNotNone(total_time)
         self.assertAlmostEqual(total_time, 120, delta=1)
     
@@ -89,4 +89,4 @@ class TaskModelTest(TestCase):
             status="pending",
         )
 
-        self.assertIsNone(task.total_time())
+        self.assertIsNone(task.total_time_minutes())

@@ -17,28 +17,28 @@ class AttendanceViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['POST'], url_path='mark-entry')
     def mark_entry(self, request, pk=None):
         """
-        Marca la hora de inicio del Attendance especificado.
+        Marks the start time of the specified Attendance.
         """
         attendance = self.get_object()
         if attendance.entry_at is not None:
-            return response.Response({'error': 'Ya tiene hora de inicio'}, 
+            return response.Response({'error': 'Start time has already been set'}, 
                                       status=status.HTTP_400_BAD_REQUEST)
 
         attendance.entry_at = datetime.now()
         attendance.save()
-        return response.Response({'status': 'Registro de inicio guardado'})
+        return response.Response({'status': 'Saved startup log'})
     
 
     @action(detail=True, methods=['POST'], url_path='mark-exit')
     def mark_exit(self, request, pk=None):
         """
-        Marca la hora de fin del Attendance especificado.
+        Marks the end time of the specified Attendance.
         """
         attendance = self.get_object()
         if attendance.exit_at is not None:
-            return response.Response({'error': 'Ya tiene hora de fin'}, 
+            return response.Response({'error': 'The end time is now'}, 
                                       status=status.HTTP_400_BAD_REQUEST)
 
         attendance.exit_at = datetime.now()
         attendance.save()
-        return response.Response({'status': 'Registro de salida guardado'})
+        return response.Response({'status': 'Saved output log'})
