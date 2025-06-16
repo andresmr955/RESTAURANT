@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets, permissions, response, status
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from .serializers import AttendanceSerializer
@@ -14,31 +15,51 @@ class AttendanceViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-    @action(detail=True, methods=['POST'], url_path='mark-entry')
-    def mark_entry(self, request, pk=None):
-        """
-        Marks the start time of the specified Attendance.
-        """
-        attendance = self.get_object()
-        if attendance.entry_at is not None:
-            return response.Response({'error': 'Start time has already been set'}, 
-                                      status=status.HTTP_400_BAD_REQUEST)
+    @action(detail=False, methods=['POST'], url_path='mark-entry')
+    def mark_entry(self, request):
+        user = request.user
 
-        attendance.entry_at = datetime.now()
-        attendance.save()
-        return response.Response({'status': 'Saved startup log'})
-    
+        if Attendance.objects.filter(assigned_employee=user, login_end__isnull=True).exists():
+            return Response({'error': 'You already have an open entry'}, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=['POST'], url_path='mark-exit')
+        # Get the login time sent by the user (example: “2025-06-16T08:00”)You must send the login time (login_start).
+        login_start_str = request.data.get('login_start')
+        if not login_start_str:
+            return Response({'error': 'You must send the login time (login_start).'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # We try to convert string to datetime (adjust formatting if necessary)
+        try:
+            login_start = datetime.fromisoformat(login_start_str)
+        except ValueError:
+            return Response({'error': 'Invalid date format. Use ISO 8601, e.g.: 2025-06-16T08:00:00'}, 
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        attendance = Attendance.objects.create(
+            assigned_employee=user,
+            login_start=login_start
+        )
+
+        return Response({'status': 'Saved entry time', 'login_start': attendance.login_start})
+
+    @action(detail=False, methods=['POST', 'GET'], url_path='mark-exit')
     def mark_exit(self, request, pk=None):
         """
         Marks the end time of the specified Attendance.
         """
-        attendance = self.get_object()
-        if attendance.exit_at is not None:
-            return response.Response({'error': 'The end time is now'}, 
-                                      status=status.HTTP_400_BAD_REQUEST)
+        user = request.user
 
-        attendance.exit_at = datetime.now()
+        try:
+            attendance = Attendance.objects.get(assigned_employee=user, login_end=None)
+        except Attendance.DoesNotExist:
+            return Response({'error': 'You cant find an unlocked start'}, 
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        attendance.login_end = datetime.now()
         attendance.save()
-        return response.Response({'status': 'Saved output log'})
+        return Response({'status': 'Saved output log'})
+
+    @action(detail=False, url_path='user/(?P<user_id>[^/.]+)')
+    def attendances_by_user(self, request, user_id=None):
+        attendances = self.queryset.filter(assigned_employee_id=user_id)
+        serializer = self.get_serializer(attendances, many=True)
+        return Response(serializer.data)
