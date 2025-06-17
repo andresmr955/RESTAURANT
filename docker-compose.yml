@@ -1,13 +1,13 @@
-version: '3.8'
+
 services:
   db:
     image: postgres:15
     env_file: .env
   backend:
-    build: ./backend
+    build: ./restaurantapp
     command: gunicorn restauranteapp.wsgi:application
     volumes:
-      - ./backend:/app
+      - ./restaurantapp:/app
     env_file: .env
     depends_on: [db]
   frontend:
