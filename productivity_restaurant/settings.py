@@ -203,3 +203,7 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
+
+#https://restaurantapp-5b0dafcc76bd.herokuapp.com/admin/login/?next=/admin/
+#http://localhost:8000/api/schema/swagger-ui/#/Users/users_employees_actions_list
