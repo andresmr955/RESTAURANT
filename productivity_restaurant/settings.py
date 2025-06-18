@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 #docker
 #SECRET_KEY = config('SECRET_KEY')
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='clave_de_prueba_para_desarollo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #Docker
@@ -37,8 +37,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'restaurantapp.herokuapp.com']
 
-allowed_hosts_str = config('ALLOWED_HOSTS', default='*')
-ALLOWED_HOSTS = allowed_hosts_str.split(',') if allowed_hosts_str != '*' else ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
+
 # Application definition
 
 INSTALLED_APPS = [
