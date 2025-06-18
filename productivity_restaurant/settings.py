@@ -192,3 +192,9 @@ CSRF_TRUSTED_ORIGINS = [ "http://localhost:4200",
                          "http://127.0.0.1:8000" ]
 
 CSRF_COOKIE_SECURE = False
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Acepta cookies seguras
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
