@@ -37,8 +37,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'restaurantapp.herokuapp.com']
 
-ALLOWED_HOSTS = [config('ALLOWED_HOSTS', default='*')]
-
+allowed_hosts_str = config('ALLOWED_HOSTS', default='*')
+ALLOWED_HOSTS = allowed_hosts_str.split(',') if allowed_hosts_str != '*' else ['*']
 # Application definition
 
 INSTALLED_APPS = [
