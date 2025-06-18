@@ -35,9 +35,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 #ALLOWED_HOSTS = ['restaurantapp.herokuapp.com'] when docker
 
 
-#ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'restaurantapp.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'restaurantapp.herokuapp.com']
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
+#ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
 
 # Application definition
 
