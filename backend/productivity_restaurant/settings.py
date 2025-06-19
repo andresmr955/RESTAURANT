@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#Docker
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = False
+#ALLOWED_HOSTS = ['restaurantapp.herokuapp.com'] when docker
 
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+#ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost').split(',')
 
 # Application definition
 
@@ -60,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -89,17 +98,19 @@ WSGI_APPLICATION = 'productivity_restaurant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+#wHE USE DOCKER 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
+        'HOST': 'localhost',
         'PORT': config('DB_PORT', default='5432'),
 
     }
 }
+
 
 
 # Password validation
@@ -139,6 +150,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -167,8 +180,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     
-    'django.contrib.auth.backends.ModelBackend',  # Para el modelo de usuario estándar
-     # Asegúrate de que esta sea la ubicación correcta
+    'django.contrib.auth.backends.ModelBackend', 
 ]
 
 CSRF_TRUSTED_ORIGINS = [ "http://localhost:4200",  
@@ -176,3 +188,9 @@ CSRF_TRUSTED_ORIGINS = [ "http://localhost:4200",
                          "http://127.0.0.1:8000" ]
 
 CSRF_COOKIE_SECURE = False
+
+
+
+
+#https://restaurantapp-5b0dafcc76bd.herokuapp.com/admin/login/?next=/admin/
+#http://localhost:8000/api/schema/swagger-ui/#/Users/users_employees_actions_list
