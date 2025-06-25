@@ -1,0 +1,69 @@
+
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h1>Tareas asignadas (Mock)</h1>
+      <p>All my tasks in one place</p>
+      
+    </div>
+  </header>
+  <div class="container todoapp-wrapper">
+    <!-- This section should be hidden by default and shown when there are todos -->
+    <section class="main">
+    
+      <ul class="todo-list" *ngIf="tasks().length > 0; else sinTareas">
+        <li *ngFor="let task of tasks()">
+        
+          <div class="view">
+            <input class="toggle" type="checkbox" checked />
+            <label><strong>{{task.description}}</strong></label>
+                        Estado: {{ task.status }}<br />
+                        Prioridad: {{ task.priority }}<br />
+                        Fecha asignada: {{ task.assigned_date | date }}
+            <button class="destroy" (click)="deleteTask(task.id)"></button>
+          </div>
+        </li>
+<!--         
+        <li class="completed">
+          <div class="view">
+            <input class="toggle" type="checkbox" checked />
+            <label>Learn JavaScript</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Learn JavaScript" />
+        </li>
+        <li class="editing">
+          <div class="view">
+            <input class="toggle" type="checkbox" />
+            <label>Make dishes</label>
+            <button class="destroy"></button>
+          </div>
+          <input class="edit" value="Make dishes" />
+        </li> -->
+      </ul>
+    <ng-template #sinTareas>
+    <p>No hay tareas asignadas.</p>
+    </ng-template>
+
+    </section>
+    <!-- This footer should be hidden by default and shown when there are todos -->
+    <footer class="footer">
+      <!-- This should be `0 items left` by default -->
+      <span class="todo-count"><strong>0</strong> item left</span>
+      <!-- Remove this if you don't implement routing -->
+      <ul class="filters">
+        <li>
+          <a routerLink="/" class="selected">All</a>
+        </li>
+        <li>
+          <a routerLink="/pending">Pending</a>
+        </li>
+        <li>
+          <a routerLink="/completed">Completed</a>
+        </li>
+      </ul>
+      <!-- Hidden if no completed items are left ↓ -->
+      <button class="clear-completed">Clear completed</button>
+    </footer>
+  </div>
+</section>
