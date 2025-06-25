@@ -15,11 +15,20 @@
         <li *ngFor="let task of tasks()">
         
           <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label><strong>{{task.description}}</strong></label>
-                        Estado: {{ task.status }}<br />
-                        Prioridad: {{ task.priority }}<br />
-                        Fecha asignada: {{ task.assigned_date | date }}
+            
+            <input class="toggle" 
+                   type="checkbox" 
+                   [checked]="task.status ==='completed'"  
+                   (change)="onToggle(task)" 
+            />
+            <label>
+                <strong>{{task.description}}</strong>
+                <ul>
+                    <li>Estado: {{ task.status }}</li>
+                    <li>Prioridad: {{ task.priority }}</li>
+                    <li>Fecha asignada: {{ task.assigned_date | date }}</li>
+                </ul>            
+            </label>
             <button class="destroy" (click)="deleteTask(task.id)"></button>
           </div>
         </li>

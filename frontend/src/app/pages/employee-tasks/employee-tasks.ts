@@ -13,7 +13,7 @@ export class EmployeeTasks {
   tasks = signal<Task[]>([
     {
       id: 1,
-      status: 'pending',
+      status: 'in progress',
       description: 'Preparar ingredientes',
       assigned_employee: 7,
       priority: 2,
@@ -64,4 +64,20 @@ export class EmployeeTasks {
     this.tasks.update((tasks) => tasks.filter(task => task.id !== id));
     
   }
+  onToggle(task: Task) {
+
+    const nuevoEstado = task.status === 'completed' ? 'in progress' : 'completed';
+    console.log(`Checkbox cambiado: ${task.description} → ${nuevoEstado}`);
+    if (task.status === 'pending') {
+      task.status = 'in progress';
+    } else if (task.status === 'in progress') {
+      task.status = 'completed';
+    } else {
+      task.status = 'pending';
+    }
+
+    this.tasks.update(tasks =>
+      tasks.map(t => t.id === task.id ? { ...t, status: task.status } : t)
+    );
+    }
 }
