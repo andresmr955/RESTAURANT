@@ -2,7 +2,7 @@
 <section class="todoapp">
   <header class="header">
     <div class="container">
-      <h1>Tareas asignadas (Mock)</h1>
+      <h1> Assigned Tasks (Mock)</h1>
       <p>All my tasks in one place</p>
       
     </div>
@@ -24,9 +24,9 @@
             <label>
                 <strong>{{task.description}}</strong>
                 <ul>
-                    <li>Estado: {{ task.status }}</li>
-                    <li>Prioridad: {{ task.priority }}</li>
-                    <li>Fecha asignada: {{ task.assigned_date | date }}</li>
+                    <li>Status: {{ task.status }}</li>
+                    <li>Priority: {{ task.priority }}</li>
+                    <li>Assigned date: {{ task.assigned_date | date }}</li>
                 </ul>            
             </label>
             <button class="destroy" (click)="deleteTask(task.id)"></button>

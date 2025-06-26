@@ -60,14 +60,14 @@ export class EmployeeTasks {
   }
 
   deleteTask(id: number){
-    console.log('ID recibido para eliminar:', id);
+    
     this.tasks.update((tasks) => tasks.filter(task => task.id !== id));
     
   }
+  
   onToggle(task: Task) {
 
-    const nuevoEstado = task.status === 'completed' ? 'in progress' : 'completed';
-    console.log(`Checkbox cambiado: ${task.description} → ${nuevoEstado}`);
+   
     if (task.status === 'pending') {
       task.status = 'in progress';
     } else if (task.status === 'in progress') {
