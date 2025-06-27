@@ -7,7 +7,7 @@ import { Task } from './../../models/task.model';
   selector: 'app-employee-tasks',
   imports: [CommonModule],
   templateUrl: './employee-tasks.html',
-  styleUrl: './employee-tasks.scss'
+  styleUrl: './employee-tasks.css'
 })
 export class EmployeeTasks {
   tasks = signal<Task[]>([

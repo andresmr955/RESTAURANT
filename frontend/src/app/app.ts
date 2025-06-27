@@ -9,7 +9,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   templateUrl: './app.html',
-  styleUrls: ['./app.scss'], 
+  styleUrls: ['./app.css'], 
 })
 export class App {
   protected title = 'frontend';
