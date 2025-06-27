@@ -257,6 +257,7 @@
 }
 
 .footer {
+  
   padding: 1rem 1.5rem;
   height: 20px;
   text-align: center;
@@ -293,6 +294,7 @@
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: 3px;
+  gap: 5px;
 }
 
 .filters li a:hover {
@@ -301,15 +303,19 @@
 
 .filters li a.selected {
   border-color: #4c33b1;
+  
 }
 
 .clear-completed,
 html .clear-completed:active {
   float: right;
   position: relative;
+  left: 12px;
   line-height: 19px;
   text-decoration: none;
   cursor: pointer;
+   
+  
 }
 
 .clear-completed:hover {

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from './../../models/task.model';
 
@@ -24,8 +24,19 @@ export class EmployeeTasks {
     },
     {
       id: 2,
-      status: 'in progress',
+      status: 'completed',
       description: 'Cocinar arroz',
+      assigned_employee: 7,
+      priority: 1,
+      assigned_date: '2024-06-25T09:00:00Z',
+      start_time: '2024-06-25T09:30:00Z',
+      end_time: null,
+      comments: 'Empezado por el turno anterior'
+    },
+    {
+      id: 3,
+      status: 'pending',
+      description: 'Frisoles',
       assigned_employee: 7,
       priority: 1,
       assigned_date: '2024-06-25T09:00:00Z',
@@ -34,6 +45,23 @@ export class EmployeeTasks {
       comments: 'Empezado por el turno anterior'
     }
   ]);
+
+  filter = signal<'all' | 'pending' | 'completed' | 'in progress'>('all')
+    tasksByFilter = computed(() => {
+      const filter = this.filter();
+      const tasks = this.tasks();
+      if (filter === 'pending') {
+        return tasks.filter(task => task.status === 'pending');
+      }
+      if (filter === 'in progress') {
+        return tasks.filter(task => task.status === 'in progress');
+      }
+      if (filter === 'completed') {
+        return tasks.filter(task => task.status === 'completed');
+      }
+      return tasks;
+    })
+  
 
   changeHandler(event: Event){
       const input = event.target as HTMLInputElement;
@@ -80,4 +108,9 @@ export class EmployeeTasks {
       tasks.map(t => t.id === task.id ? { ...t, status: task.status } : t)
     );
     }
+
+
+    changeFilter(filter: 'all' | 'pending' | 'completed' | 'in progress') {
+    this.filter.set(filter);
+  }
 }

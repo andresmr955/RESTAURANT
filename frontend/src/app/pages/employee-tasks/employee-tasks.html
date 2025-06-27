@@ -12,7 +12,7 @@
     <section class="main">
     
       <ul class="todo-list" *ngIf="tasks().length > 0; else sinTareas">
-        <li *ngFor="let task of tasks(); index as i" [class.completed]="task.status === 'completed'">
+        <li *ngFor="let task of tasksByFilter(); index as i" [class.completed]="task.status === 'completed'">
         
           <div class="view">
             
@@ -59,24 +59,27 @@
     <footer class="footer">
       <!-- This should be `0 items left` by default -->
 
-      <span class="todo-count" *ngIf="tasks().length > 1; else fewitems"><strong>{{tasks().length}}</strong> items left</span>
+      <span class="todo-count" *ngIf="tasksByFilter().length > 1; else fewitems"><strong>{{tasksByFilter().length}}</strong> items left</span>
         <ng-template #fewitems>
-            <span class="todo-count" *ngIf="tasks().length == 1; else cero"><strong>1</strong> item left</span>
+            <span class="todo-count" *ngIf="tasksByFilter().length == 1; else cero"><strong>1</strong> item left</span>
         </ng-template >
           
         <ng-template #cero>
-            <span class="todo-count"  *ngIf="tasks().length == 0; else cero"><strong>0</strong> item left</span>
+            <span class="todo-count"  *ngIf="tasksByFilter().length == 0; else cero"><strong>0</strong> item left</span>
         </ng-template>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a (click)="changeFilter('pending')" [class.selected]="filter() === 'pending'">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a (click)="changeFilter('in progress')" [class.selected]="filter() === 'in progress'">In progress</a>
+        </li>
+        <li>
+          <a (click)="changeFilter('completed')" [class.selected]="filter() === 'completed'">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
