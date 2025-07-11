@@ -7,7 +7,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, ],
   templateUrl: './app.html',
   styleUrls: ['./app.css'], 
 })
