@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Import 
 import { Button } from './../../../../shared/components/button/button'
 import { AuthService } from './../../../../services/auth.service';
 import { RequestStatus } from './../../../../models/request-status.model';
-
+import { TokenService } from './../../../../services/token.service';
 @Component({
   selector: 'app-login-form',
   imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, Button ],
@@ -28,7 +28,8 @@ export class LoginForm {
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenService: TokenService
   ) {
     this.form = this.formBuilder.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
@@ -45,6 +46,7 @@ export class LoginForm {
   }
 
   doLogin() {
+
     if (this.form.valid) {
       this.status = 'loading';
       const { email, password } = this.form.getRawValue();

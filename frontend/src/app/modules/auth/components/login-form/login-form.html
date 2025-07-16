@@ -1,4 +1,5 @@
-<h1 class="text-center font-bold py-2 text-gray-700">Log in to Trello</h1>
+
+<h1 class="text-center font-bold py-2 text-gray-700">Log in to Productivity Restaurant</h1>
 <form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doLogin()">
   <div>
     <div class="relative">
@@ -7,7 +8,7 @@
         formControlName="email"
         placeholder="Enter email"
         type="email"
-        class="w-full rounded bg-gray-100 border-gray-300 border-2"
+        class="w-full rounded bg-gray-100 border border-gray-300 px-3 py-2 text-sm"
       />
       <button type="button" class="p-2 absolute right-2" (click)="nameInput.focus()">
         <fa-icon [icon]="faPen"></fa-icon>
@@ -35,9 +36,11 @@
         formControlName="password"
         placeholder="Enter password"
         [type]="showPassword ? 'text' : 'password'"
-        class="w-full rounded bg-gray-100 border-gray-300 border-2"
+        class="w-full rounded bg-gray-100 border border-gray-300 px-3 py-2 text-sm"
       />
-      <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
+      <button type="button" 
+              class="p-2 absolute right-2" 
+              (click)="showPassword = !showPassword">
         <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
       </button>
     </div>
@@ -68,7 +71,28 @@
       typeBtn="submit"
       color="success"
       [loading]="status === 'loading'"
-      >Login</app-button
+      >Login
+    </app-button>
+    <button class="bg-white border border-gray-300 flex items-center justify-center gap-2 w-full py-2 rounded hover:bg-gray-100 mt-4">
+            <img src="/assets/images/icons/google.png" class="w-5 h-5" alt="">
+            <span class="text-sm font-medium text-gray-700">Continue with Google</span>
+    </button>
+
+    <!-- Facebook -->
+    <button class="bg-white border border-gray-300 flex items-center justify-center gap-2 w-full py-2 rounded hover:bg-gray-100 mt-4">
+        <img src="/assets/images/icons/facebook2.png" class="w-5 h-5 bg-white rounded-full p-0.5" alt="">
+        <span class="text-sm font-medium">Continue with Facebook</span>
+    </button>
+
+    <button
+    type="button"
+    class="bg-white border border-gray-300 flex items-center justify-center gap-2 w-full py-2 rounded hover:bg-gray-100 mt-4"
     >
+        <img src="/assets/images/icons/apple.png" alt="Apple" class="w-5 h-5">
+        <span class="text-sm font-medium">Continue with  Apple</span>
+    </button>
+
+    
   </div>
 </form>
+

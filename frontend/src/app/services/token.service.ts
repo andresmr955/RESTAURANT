@@ -16,6 +16,7 @@ export class TokenService {
 
   getToken() {
     const token = getCookie('token-app');
+   
     return token;
   }
 
@@ -28,6 +29,7 @@ export class TokenService {
   }
 
   saveRefreshToken(token: string) {
+  
     setCookie('refresh-token-app', token, { expires: 365, path: '/' });
   }
 
@@ -44,6 +46,7 @@ export class TokenService {
     const decodeToken = jwtDecode<JwtPayload>(token);
     if (decodeToken && decodeToken?.exp) {
       const tokenDate = new Date(0);
+      console.log(tokenDate)
       tokenDate.setUTCSeconds(decodeToken.exp);
       const today = new Date();
       return tokenDate.getTime() > today.getTime();

@@ -1,7 +1,7 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from './../../models/task.model';
-
+import { TaskServiceTs } from '../../services/task.service.ts';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -10,41 +10,11 @@ import { Task } from './../../models/task.model';
   styleUrl: './employee-tasks.css'
 })
 export class EmployeeTasks {
-  tasks = signal<Task[]>([
-    {
-      id: 1,
-      status: 'in progress',
-      description: 'Preparar ingredientes',
-      assigned_employee: 7,
-      priority: 2,
-      assigned_date: '2024-06-25T08:00:00Z',
-      start_time: null,
-      end_time: null,
-      comments: null
-    },
-    {
-      id: 2,
-      status: 'completed',
-      description: 'Cocinar arroz',
-      assigned_employee: 7,
-      priority: 1,
-      assigned_date: '2024-06-25T09:00:00Z',
-      start_time: '2024-06-25T09:30:00Z',
-      end_time: null,
-      comments: 'Empezado por el turno anterior'
-    },
-    {
-      id: 3,
-      status: 'pending',
-      description: 'Frisoles',
-      assigned_employee: 7,
-      priority: 1,
-      assigned_date: '2024-06-25T09:00:00Z',
-      start_time: '2024-06-25T09:30:00Z',
-      end_time: null,
-      comments: 'Empezado por el turno anterior'
-    }
-  ]);
+  tasks = signal<Task[]>([]);
+
+  constructor(private taskService: TaskServiceTs){
+    this.loadTasks();
+  }
 
   filter = signal<'all' | 'pending' | 'completed' | 'in progress'>('all')
     tasksByFilter = computed(() => {
@@ -112,5 +82,12 @@ export class EmployeeTasks {
 
     changeFilter(filter: 'all' | 'pending' | 'completed' | 'in progress') {
     this.filter.set(filter);
+  }
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe({
+      next: (data: Task[]) => this.tasks.set(data),
+      error: (err: any) => console.error('Error cargando tareas:', err)
+    });
   }
 }
