@@ -19,7 +19,7 @@ This project was conceived as a professional example intended both to complete a
 
 ### Project Structure
 ```
-1. RestaurantApp/
+1. RestaurantApp/Frontend
   src/
 ├── app/
 │   ├── core/               # Application logic (services, interceptors, etc.)
@@ -38,6 +38,29 @@ This project was conceived as a professional example intended both to complete a
 │   │   ├── navbar/         # Navbar and other reusable UI components
 │   ├── app module         # Root application module
 │   ├── app-routing module # Routing configuration for the application
+
+
+src/
+├── restaurantapp/               # Core Django project files (settings, URL config, ASGI/WSGI)
+│   ├── settings.py              # Settings and configurations for the project
+│   ├── urls.py                  # URL routing for the project
+│   ├── asgi.py                  # ASGI configuration for asynchronous handling
+│   └── wsgi.py                  # WSGI configuration for web server gateway interface
+├── users/                        # User-related functionality (models, serializers, views)
+│   ├── models.py                # Defines user-related models (custom user, permissions)
+│   ├── serializers.py           # Serializers for user data (e.g., for API requests)
+│   ├── views.py                 # Views for user-related actions (login, registration, etc.)
+│   └── urls.py                  # URL routing for user-related views
+├── tasks/                        # Task-related functionality (models, serializers, views)
+│   ├── models.py                # Task models for managing tasks and statuses
+│   ├── serializers.py           # Serializers for task data (e.g., for API requests)
+│   ├── views.py                 # Views for task management and actions
+│   └── urls.py                  # URL routing for task-related views
+└── frontend/                     # Frontend directory for the Angular application
+    └── angular-frontend/         # The actual Angular project folder
+└── manage.py                     # Django's command-line tool for managing the project
+└── requirements.txt              # Lists all the dependencies required for the backend
+└── README.md                     # Project documentation or setup i
 
 ### Main Features
 
