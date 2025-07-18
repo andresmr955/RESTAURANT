@@ -20,27 +20,24 @@ This project was conceived as a professional example intended both to complete a
 ### Project Structure
 
 1. RestaurantApp/
-    - └ src/
-        - └ restaurantapp/
-            - └ settings.py
-            - └ urls.py
-            - └ asgi.py
-            - └ wsgi.py
-        - └ users/
-            - └ models.py
-            - └ serializers.py
-            - └ views.py
-            - └ urls.py
-        - └ tasks/
-            - └ models.py
-            - └ serializers.py
-            - └ views.py
-            - └ urls.py
-    - └ frontend
-        - └ angular-frontend/
-    - └ manage.py
-    - └ requirements.txt
-    - └README.md
+  src/
+├── app/
+│   ├── core/               # Application logic (services, interceptors, etc.)
+│   ├── modules/            # Specific modules (each module has its own components and pages)
+│   │   ├── auth/           # Authentication module
+│   │   │   ├── components/ # Components inside the auth module (login form, etc.)
+│   │   │   ├── pages/      # Pages inside the auth module (login, register, etc.)
+│   │   │   ├── auth service  # Authentication service
+│   │   │   ├── auth guard    # Authentication guard
+│   │   ├── dashboard/      # Dashboard module
+│   │   │   ├── components/ # Components inside the dashboard module (widgets, charts, etc.)
+│   │   │   ├── pages/      # Pages inside the dashboard module (main view, etc.)
+│   │   │   ├── dashboard service  # Dashboard-related service
+│   ├── shared/             # Reusable components, directives, pipes
+│   ├── ui/                 # Common UI components (navbar, buttons, modals, etc.)
+│   │   ├── navbar/         # Navbar and other reusable UI components
+│   ├── app module         # Root application module
+│   ├── app-routing module # Routing configuration for the application
 
 ### Main Features
 
