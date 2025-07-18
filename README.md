@@ -18,7 +18,7 @@ This project was conceived as a professional example intended both to complete a
 ✅ Render (optional) — cloud deployment without AWS (more economical)  
 
 ### Project Structure
-
+```
 1. RestaurantApp/
   src/
 ├── app/
