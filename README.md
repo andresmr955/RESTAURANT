@@ -19,8 +19,8 @@ This project was conceived as a professional example intended both to complete a
 
 ### Project Structure
 ```
-1. RestaurantApp/Frontend
-  src/
+1. RestaurantApp/
+  src/Frontend
 ├── app/
 │   ├── core/               # Application logic (services, interceptors, etc.)
 │   ├── modules/            # Specific modules (each module has its own components and pages)
@@ -40,7 +40,7 @@ This project was conceived as a professional example intended both to complete a
 │   ├── app-routing module # Routing configuration for the application
 
 
-src/
+src/Backend
 ├── restaurantapp/               # Core Django project files (settings, URL config, ASGI/WSGI)
 │   ├── settings.py              # Settings and configurations for the project
 │   ├── urls.py                  # URL routing for the project
