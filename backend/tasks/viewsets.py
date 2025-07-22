@@ -48,5 +48,18 @@ class TaskViewSet(viewsets.ModelViewSet):
             task.save()
         return Response({'status': 'stopped'})
 
+    @action(detail=True, methods=['patch'])
+    def change_status(self, request, pk=None):
+        task = self.get_object()
+        new_status = request.data.get('status')
+        valid_statuses = [choice[0] for choice in task.STATUS_CHOICES]
+
+        if new_status not in valid_statuses:
+            return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
+
+        task.status = new_status
+        task.save()
+        return Response({'status': f'Task status changed to {new_status}'}, status=status.HTTP_200_OK)
     
+
     
