@@ -5,9 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { faPen, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Import FontAwesomeModule
 import { Button } from './../../../../shared/components/button/button'
-import { AuthService } from './../../../../services/auth.service';
+import { AuthService } from './../../../../core/services/auth.service';
 import { RequestStatus } from './../../../../models/request-status.model';
-import { TokenService } from './../../../../services/token.service';
+import { TokenService } from './../../../../core/services/token.service';
 @Component({
   selector: 'app-login-form',
   imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, Button ],

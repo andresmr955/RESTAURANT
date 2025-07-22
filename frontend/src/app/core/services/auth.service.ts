@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../environments/environment';
+import { environment } from './../../../environments/environment';
 import { switchMap, tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
 import { MeService } from './me.service';
-import { ResponseLogin } from './../models/auth.model';
-import { CustomerUser } from './../models/user.model';
+import { ResponseLogin } from './../../models/auth.model';
+import { CustomerUser } from './../../models/user.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

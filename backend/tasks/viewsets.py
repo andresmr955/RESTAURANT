@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions
+from rest_framework.exceptions import PermissionDenied
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -38,6 +39,7 @@ class TaskViewSet(viewsets.ModelViewSet):
             task.save()
         return Response({'status': 'started'})
 
+
     @action(detail=True, methods=['post'])
     def stop(self, request, pk=None):
         task = self.get_object()
@@ -46,7 +48,5 @@ class TaskViewSet(viewsets.ModelViewSet):
             task.save()
         return Response({'status': 'stopped'})
 
-   
     
-
     

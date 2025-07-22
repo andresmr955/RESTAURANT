@@ -1,7 +1,7 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Task } from './../../models/task.model';
-import { TaskServiceTs } from '../../services/task.service.ts';
+import { Task } from './../../../../models/task.model';
+import { TaskServiceTs } from './../../../../core/services/task.service.ts';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -13,8 +13,12 @@ export class EmployeeTasks {
   tasks = signal<Task[]>([]);
 
   constructor(private taskService: TaskServiceTs){
+  }
+
+  ngOnInit(){
     this.loadTasks();
   }
+
 
   filter = signal<'all' | 'pending' | 'completed' | 'in progress'>('all')
     tasksByFilter = computed(() => {
@@ -63,23 +67,7 @@ export class EmployeeTasks {
     
   }
   
-  onToggle(task: Task) {
-
-   
-    if (task.status === 'pending') {
-      task.status = 'in progress';
-    } else if (task.status === 'in progress') {
-      task.status = 'completed';
-    } else {
-      task.status = 'pending';
-    }
-
-    this.tasks.update(tasks =>
-      tasks.map(t => t.id === task.id ? { ...t, status: task.status } : t)
-    );
-    }
-
-
+  
     changeFilter(filter: 'all' | 'pending' | 'completed' | 'in progress') {
     this.filter.set(filter);
   }
