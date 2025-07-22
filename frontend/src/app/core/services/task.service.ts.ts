@@ -23,5 +23,9 @@ export class TaskServiceTs {
     });
   }
 
-
+  updateTaskStatus(id: number, status: Task['status']){
+    return this.http.patch<Task>(`${this.apiURL}/api/tasksapp/tasks/${id}`, {status}, {
+      context: checkToken()
+    });
+  }
 }
