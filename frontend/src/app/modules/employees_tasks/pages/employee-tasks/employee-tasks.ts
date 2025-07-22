@@ -67,7 +67,50 @@ export class EmployeeTasks {
     
   }
   
-  
+  onToggle(task: Task) {
+    let newStatus: Task['status'];
+    
+    switch (task.status) { 
+        case 'pending':
+          newStatus = 'in progress';
+          break;
+        case 'in progress':
+          newStatus = 'completed';
+          break;
+        default: 
+          newStatus = 'pending'
+    }
+
+    //Update local task in signal
+    this.tasks.update(tasks => 
+      tasks.map(t => 
+        t.id === task.id ? { ...t, status: newStatus }: t
+      )
+    );
+
+    //send to backend
+
+    this.taskService.updateTaskStatus(task.id, newStatus).subscribe({
+      next: (updatedTask) => {
+        this.tasks.update(tasks =>
+          tasks.map(t =>
+            t.id === updatedTask.id ? updatedTask : t
+          )
+        );
+      }, 
+      error: (err) => {
+        console.log('Error updating backend status', err);
+        this.tasks.update(
+          tasks => 
+            tasks.map(t => 
+              t.id === task.id ? { ...t, status: task.status}: t
+            )
+        );
+      }
+    });
+} 
+
+
     changeFilter(filter: 'all' | 'pending' | 'completed' | 'in progress') {
     this.filter.set(filter);
   }
