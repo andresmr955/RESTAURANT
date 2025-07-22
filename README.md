@@ -18,29 +18,49 @@ This project was conceived as a professional example intended both to complete a
 ✅ Render (optional) — cloud deployment without AWS (more economical)  
 
 ### Project Structure
-
+```
 1. RestaurantApp/
-    - └ src/
-        - └ restaurantapp/
-            - └ settings.py
-            - └ urls.py
-            - └ asgi.py
-            - └ wsgi.py
-        - └ users/
-            - └ models.py
-            - └ serializers.py
-            - └ views.py
-            - └ urls.py
-        - └ tasks/
-            - └ models.py
-            - └ serializers.py
-            - └ views.py
-            - └ urls.py
-    - └ frontend
-        - └ angular-frontend/
-    - └ manage.py
-    - └ requirements.txt
-    - └README.md
+  src/Frontend
+├── app/
+│   ├── core/               # Application logic (services, interceptors, etc.)
+│   ├── modules/            # Specific modules (each module has its own components and pages)
+│   │   ├── auth/           # Authentication module
+│   │   │   ├── components/ # Components inside the auth module (login form, etc.)
+│   │   │   ├── pages/      # Pages inside the auth module (login, register, etc.)
+│   │   │   ├── auth service  # Authentication service
+│   │   │   ├── auth guard    # Authentication guard
+│   │   ├── dashboard/      # Dashboard module
+│   │   │   ├── components/ # Components inside the dashboard module (widgets, charts, etc.)
+│   │   │   ├── pages/      # Pages inside the dashboard module (main view, etc.)
+│   │   │   ├── dashboard service  # Dashboard-related service
+│   ├── shared/             # Reusable components, directives, pipes
+│   ├── ui/                 # Common UI components (navbar, buttons, modals, etc.)
+│   │   ├── navbar/         # Navbar and other reusable UI components
+│   ├── app module         # Root application module
+│   ├── app-routing module # Routing configuration for the application
+
+
+src/Backend
+├── restaurantapp/               # Core Django project files (settings, URL config, ASGI/WSGI)
+│   ├── settings.py              # Settings and configurations for the project
+│   ├── urls.py                  # URL routing for the project
+│   ├── asgi.py                  # ASGI configuration for asynchronous handling
+│   └── wsgi.py                  # WSGI configuration for web server gateway interface
+├── users/                        # User-related functionality (models, serializers, views)
+│   ├── models.py                # Defines user-related models (custom user, permissions)
+│   ├── serializers.py           # Serializers for user data (e.g., for API requests)
+│   ├── views.py                 # Views for user-related actions (login, registration, etc.)
+│   └── urls.py                  # URL routing for user-related views
+├── tasks/                        # Task-related functionality (models, serializers, views)
+│   ├── models.py                # Task models for managing tasks and statuses
+│   ├── serializers.py           # Serializers for task data (e.g., for API requests)
+│   ├── views.py                 # Views for task management and actions
+│   └── urls.py                  # URL routing for task-related views
+└── frontend/                     # Frontend directory for the Angular application
+    └── angular-frontend/         # The actual Angular project folder
+└── manage.py                     # Django's command-line tool for managing the project
+└── requirements.txt              # Lists all the dependencies required for the backend
+└── README.md                     # Project documentation or setup i
 
 ### Main Features
 
