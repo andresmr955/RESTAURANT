@@ -25,7 +25,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer.save()
 
     def get_queryset(self):
-        queryset = Task.objects.all()
+        user = self.request.user
+        queryset = Task.objects.filter(assigned_employee=user)
+
         assigned_employee = self.request.query_params.get('assigned_employee')
         if assigned_employee:
             queryset = queryset.filter(assigned_employee=assigned_employee)

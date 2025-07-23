@@ -15,6 +15,8 @@ class CustomTokenSerializer(TokenObtainPairSerializer):
         token["username"] = user.username  # Include the 'username' in the token
         token["email"] = user.email  # Include the email in the token
         token["is_manager"] = user.is_manager()  # Add other relevant fields if necessary
+        token["is_chef"] = user.is_chef()  
+        token["is_cook"] = user.is_cook()  
         return token
 
     def validate(self, attrs):

@@ -31,23 +31,7 @@
             <button class="destroy" (click)="deleteTask(task.id)"></button>
           </div>
         </li>
-<!--         
-        <li class="completed">
-          <div class="view">
-            <input class="toggle" type="checkbox" checked />
-            <label>Learn JavaScript</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Learn JavaScript" />
-        </li>
-        <li class="editing">
-          <div class="view">
-            <input class="toggle" type="checkbox" />
-            <label>Make dishes</label>
-            <button class="destroy"></button>
-          </div>
-          <input class="edit" value="Make dishes" />
-        </li> -->
+
       </ul>
     <ng-template #sinTareas>
     <p>No hay tareas asignadas.</p>
@@ -82,7 +66,11 @@
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed"
+              
+              (click)="clearCompleted()"
+      >Clear Completed
+    </button>
     </footer>
   </div>
 </section>

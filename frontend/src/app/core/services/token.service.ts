@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 import { JwtPayload, jwtDecode} from "jwt-decode";
-
-
+import { JwtPayloadUser } from './../../models/jwtPayload.model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +66,18 @@ export class TokenService {
       return tokenDate.getTime() > today.getTime();
     }
     return false;
+  }
+
+  getDecodedUser(): JwtPayloadUser | null{
+    const token = this.getToken();
+    if (!token) return null;
+
+    try{
+      const decoded = jwtDecode<JwtPayloadUser>(token);
+      return decoded
+    } catch(e){
+      console.error('Error to decode token', e);
+      return null;
+    }
   }
 }

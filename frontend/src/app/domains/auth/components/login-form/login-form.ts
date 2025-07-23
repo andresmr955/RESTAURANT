@@ -54,7 +54,14 @@ export class LoginForm {
       .subscribe({
         next: () => {
           this.status = 'success';
+          const user = this.tokenService.getDecodedUser();
+          if (user?.is_manager){
+            this.router.navigate(['/dashboard'])
+          }else if(user?.is_chef){
+            this.router.navigate(['/chef-panel'])
+          }else if(user?.is_cook){
           this.router.navigate(['/employee-tasks']);
+          }
         },
         error: () => {
           this.status = 'failed';

@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { Cms } from './pages/cms/cms';
+const routes: Routes = [
+
+    {
+      path: '',
+      redirectTo: 'cms', 
+      pathMatch: 'full'
+    },
+    {
+      path: 'cms', 
+      component: Cms, 
+      title: 'cms'
+    }
+
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DashboardRoutingModule { }

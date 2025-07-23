@@ -1,15 +1,17 @@
 import { Routes } from '@angular/router';
-import { Login } from './domains/auth/pages/login/login';
-import { EmployeeTasks } from './domains/employees_tasks/pages/employee-tasks/employee-tasks';
 import { NotFoundComponent } from './shared/components/not-found-component/not-found-component';
 export const routes: Routes = [
      {
-    path: '',
-    loadChildren: () => import('./domains/auth/auth-module').then((m) => m.AuthModule),
+        path: '',
+        loadChildren: () => import('./domains/auth/auth-module').then((m) => m.AuthModule),
+    },
+    {
+        path: 'dashboard', 
+        loadChildren: () => import('./domains/dashboard/dashboard-module').then((m) => m.DashboardModule)
     },
     {
         path: 'employee-tasks', 
-        component: EmployeeTasks
+        loadChildren: () => import('./domains/employees-tasks/employees-tasks-module').then((m) => m.EmployeesTasksModule)
     },
     {   
         path: '**',
