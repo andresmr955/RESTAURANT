@@ -8,7 +8,7 @@ import { checkToken } from '../interceptors/token-interceptor';
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeesList {
+export class EmployeesListService {
 
   apiUrl = environment.API_URL
 

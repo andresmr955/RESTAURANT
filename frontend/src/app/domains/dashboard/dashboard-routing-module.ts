@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Cms } from './pages/cms/cms';
+import { EmployeesListComponent } from './pages/employees-list/employees-list';
+
 const routes: Routes = [
 
     {
@@ -11,8 +13,17 @@ const routes: Routes = [
     {
       path: 'cms', 
       component: Cms, 
-      title: 'cms'
-    }
+      title: 'cms',
+      children: [
+        {
+      path: 'employees',
+      component: EmployeesListComponent
+      }
+      ]
+      
+    }, 
+     
+   
 
 ];
 

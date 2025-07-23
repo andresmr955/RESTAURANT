@@ -11,9 +11,12 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUser
         fields = [  
+                    'id', 
                     'role',
                     'username',
                     'email',
+                    'first_name',
+                    'last_name',
                     'phone_number',
                     'avatar',
                     'date_birth',
