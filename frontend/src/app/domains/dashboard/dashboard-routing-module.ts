@@ -13,17 +13,12 @@ const routes: Routes = [
     {
       path: 'cms', 
       component: Cms, 
-      title: 'cms',
-      children: [
-        {
-      path: 'employees',
-      component: EmployeesListComponent
-      }
-      ]
-      
+      title: 'cms'
     }, 
-     
-   
+    {
+    path: 'employees',
+    component: EmployeesListComponent
+    }
 
 ];
 

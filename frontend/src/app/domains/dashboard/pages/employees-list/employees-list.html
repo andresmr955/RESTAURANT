@@ -1,33 +1,41 @@
-<h2>Empleados</h2>
+<app-navbar></app-navbar>
+<app-aside></app-aside>
+<div class="p-4 sm:ml-64">
+   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+
+<h2 class="text-center text-3xl font-semibold border-b pb-2 text-gray-700">Empoyees</h2>
 <div *ngIf="loading">Cargando empleados...</div>
 
-<table *ngIf="employees.length > 0; else noEmployees">
-    <thead>
-        <tr><th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Role</th>
-            <th>Phone Number</th>
-            <!-- <th>Photo</th> -->
-            <th>Date</th>
-            <th>Address</th>
-            <th>Notifications</th>
-            <th>Tasks</th>
+<table 
+
+    *ngIf="employees().length > 0; else noEmployees"
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr><th scope="col" class="px-6 py-3">ID</th>
+            <th scope="col" class="px-6 py-3">Username</th>
+            <th scope="col" class="px-6 py-3">Email</th>
+            <th scope="col" class="px-6 py-3">First Name</th>
+            <th scope="col" class="px-6 py-3">Last Name</th>
+            <th scope="col" class="px-6 py-3">Role</th>
+            <th scope="col" class="px-6 py-3">Phone Number</th>
+            <!-- <th scope="col" class="px-6 py-3">Photo</th> -->
+            <th scope="col" class="px-6 py-3">Date</th>
+            <th scope="col" class="px-6 py-3">Address</th>
+            <th scope="col" class="px-6 py-3">Notifications</th>
+            <th scope="col" class="px-6 py-3">Tasks</th>
         </tr>
     </thead>
-    <tbody *ngFor="let employee of employees">
+    <tbody *ngFor="let employee of employees()">
         
-        <tr>
-            <td>{{ employee.id }}</td>
-            <td>{{ employee.username }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.first_name }}</td>
-            <td>{{ employee.last_name }}</td>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            <td scope="col" class="text-center px-6 py-3">{{ employee.id }}</td>
+            <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ employee.username }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.email }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.first_name }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.last_name }}</td>
             
-            <td>{{ employee.role }}</td>
-            <td>{{ employee.phone_number }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.role }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.phone_number }}</td>
             <!-- <td>
                 {% if employee.avatar %}
                     <img src="{{ employee.avatar.url }}" alt="Avatar" width="50">
@@ -35,13 +43,13 @@
                     No avatar
                 {% endif %}
             </td> -->
-            <td>{{ employee.date_birth }}</td>
-            <td>{{ employee.address }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.date_birth }}</td>
+            <td scope="col" class="text-center px-6 py-3">{{ employee.address }}</td>
             
-            <td>{{ employee.notifications_enabled }}</td>
+            <td class="text-center">{{ employee.notifications_enabled }}</td>
         
             
-            <td>
+            <td scope="col" class="text-center px-6 py-3">
             <a href="{% url 'tasks:task_list' employee.id %}">View Tasks</a>
             </td>
             
@@ -56,3 +64,5 @@
         </tr>
     </table>
 </ng-template>
+</div>
+</div>
