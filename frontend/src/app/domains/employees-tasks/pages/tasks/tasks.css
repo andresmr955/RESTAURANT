@@ -347,6 +347,37 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile-info .profile-email {
+  color: #1f2937; /* Tailwind gray-800 */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.profile-info .profile-email:hover {
+  text-decoration: underline;
+}
+
+.profile-info .logout-btn {
+  padding: 0.4rem 0.8rem;
+  background-color: #ef4444; /* Tailwind red-500 */
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.profile-info .logout-btn:hover {
+  background-color: #dc2626; /* Tailwind red-600 */
+}
+
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
