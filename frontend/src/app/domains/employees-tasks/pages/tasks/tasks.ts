@@ -2,6 +2,7 @@ import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from './../../../../models/task.model';
 import { TaskServiceTs } from './../../../../core/services/task.service.ts';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,6 +14,7 @@ export class Tasks {
   tasks = signal<Task[]>([]);
 
   constructor(private taskService: TaskServiceTs, 
+    private authService: AuthService
   ){
   }
   
@@ -116,6 +118,12 @@ export class Tasks {
     this.tasks.update(() => []); // vacía toda la lista
     
     } 
+
+    
+    
+      logout(){
+        this.authService.logout()
+      }
 }
 
   
