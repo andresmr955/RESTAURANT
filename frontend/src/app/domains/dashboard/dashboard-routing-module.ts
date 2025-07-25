@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Cms } from './pages/cms/cms';
 import { EmployeesListComponent } from './pages/employees-list/employees-list';
-
+import { authGuard } from '../../guards/auth-guard';
+authGuard
 const routes: Routes = [
 
     {
@@ -11,7 +12,8 @@ const routes: Routes = [
       pathMatch: 'full'
     },
     {
-      path: 'cms', 
+      path: 'cms',
+      canActivate: [ authGuard ],
       component: Cms, 
       title: 'cms'
     }, 

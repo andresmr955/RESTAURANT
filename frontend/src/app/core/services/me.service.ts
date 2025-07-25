@@ -15,8 +15,10 @@ export class MeService {
   constructor(private http: HttpClient) {}
 
   getMeProfile() {
-    return this.http.get<CustomerUser>(`${this.apiUrl}/api/v1/me/profile`, {
+    return this.http.get<CustomerUser>(`${this.apiUrl}/api/users/employees-actions/me/`, {
       context: checkToken(),
-    });
+    })
+    ;
   }
+ 
 }

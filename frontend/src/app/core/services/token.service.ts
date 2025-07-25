@@ -74,6 +74,7 @@ export class TokenService {
 
     try{
       const decoded = jwtDecode<JwtPayloadUser>(token);
+      
       return decoded
     } catch(e){
       console.error('Error to decode token', e);

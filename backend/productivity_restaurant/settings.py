@@ -28,9 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #Docker
-#DEBUG = True
+#DEBUG = False
 
-DEBUG = False
+DEBUG = True
 #ALLOWED_HOSTS = ['restaurantapp.herokuapp.com'] when docker
 
 
@@ -164,6 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/api/auth/login/'
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [

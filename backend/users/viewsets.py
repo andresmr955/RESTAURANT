@@ -96,6 +96,15 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             user.notifications_enabled = False
             user.save()
         return response.Response({'status': f'Notifications deactivated all'})
-
+    
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def me(self, request): 
+        '''
+        Endpoint to get data user authenticated
+        '''
+        print('Usuario autenticado:', request.user)
+        print('¿Está autenticado?', request.user.is_authenticated)
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
     
     

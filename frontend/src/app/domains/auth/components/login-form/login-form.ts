@@ -50,23 +50,11 @@ export class LoginForm {
     if (this.form.valid) {
       this.status = 'loading';
       const { email, password } = this.form.getRawValue();
-      this.authService.login(email, password)
-      .subscribe({
-        next: () => {
-          this.status = 'success';
-          const user = this.tokenService.getDecodedUser();
-          if (user?.is_manager){
-            this.router.navigate(['/dashboard'])
-          }else if(user?.is_chef){
-            this.router.navigate(['/chef-panel'])
-          }else if(user?.is_cook){
-          this.router.navigate(['/employee-tasks']);
-          }
-        },
-        error: () => {
-          this.status = 'failed';
-        }
-      });
+      this.authService.loginAndGet(email, password).subscribe({
+  next: user => {
+      this.router.navigate(['/dashboard']);
+    }
+});
     } else {
       this.form.markAllAsTouched();
     }

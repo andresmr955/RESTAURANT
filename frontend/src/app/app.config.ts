@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { provideHttpClient, withInterceptors,  withFetch} from '@angular/common/http'; // ✅ importante
 import { tokenInterceptor } from './core/interceptors/token-interceptor';
 
@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), 
+    provideRouter(routes, withPreloading(PreloadAllModules)), 
     provideClientHydration(withEventReplay()),
     provideHttpClient( withFetch()),
     provideHttpClient(withInterceptors([tokenInterceptor]))

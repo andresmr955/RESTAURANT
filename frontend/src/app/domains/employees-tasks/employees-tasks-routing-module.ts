@@ -6,13 +6,13 @@ const routes: Routes = [
 
     {
       path: '',
-      redirectTo: 'employee-tasks',
+      redirectTo: 'tasks',
       pathMatch: 'full'
     },
     {
-      path: 'employee-tasks',
+      path: 'tasks',
       component: Tasks,
-      title: 'employee-tasks'
+      title: 'tasks'
     },
 ];
 

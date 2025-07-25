@@ -6,7 +6,9 @@ import { TokenService } from './token.service';
 import { MeService } from './me.service';
 import { ResponseLogin } from './../../models/auth.model';
 import { CustomerUser } from './../../models/user.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,7 @@ export class AuthService {
     private http: HttpClient,
     private tokenService: TokenService,
     private meService: MeService,
+    private router: Router
   ) { }
 
   getDataUser() {
@@ -27,11 +30,13 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/api/auth/loginjwt/`, {
+      
       email,
       password
     })
     .pipe(
       tap(response => {
+       
         this.tokenService.saveToken(response.access);
         this.tokenService.saveRefreshToken(response.refresh);
         
@@ -77,17 +82,33 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/api/v1/auth/change-password`, { token, newPassword });
   }
 
-  getProfile() {
-    return this.meService.getMeProfile()
-    .pipe(
-      tap(user => {
-        this.user$.next(user);
-      })
-    );
-  }
+getProfile() {
+  
+  return this.meService.getMeProfile().pipe(
+    tap(user => {
+      
+      this.user$.next(user);
+    }),
+    catchError(err => {
+     
+      this.user$.next(null);
+      return of(null);
+    })
+  );
+}
+
+
+  loginAndGet(email: string, password: string) {
+  return this.login(email, password).pipe(
+    switchMap(() => this.getProfile()), // <- devuelve un observable
+
+  );
+}
 
   logout() {
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
+    this.user$.next(null);
+    this.router.navigate(['/login'])
   }
 }
