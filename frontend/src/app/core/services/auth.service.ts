@@ -29,6 +29,14 @@ export class AuthService {
     return this.user.getValue();
   }
   setUser(user: CustomerUser | null){
+    if(user){
+      console.log('✅ Usuario actualizado:', user);
+      localStorage.setItem('user', JSON.stringify(user))
+    }else{
+      console.log('🔒 Usuario cerrado');
+      localStorage.removeItem('user');
+    }
+    console.log('llego al final de setuser')
     this.user.next(user)
   }
   login(email: string, password: string) {
@@ -113,7 +121,8 @@ getProfile() {
     localStorage.removeItem('token');
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
-    this.setUser(null);
+    
     this.router.navigate(['/login'])
+    this.setUser(null);
   }
 }
