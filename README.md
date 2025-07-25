@@ -61,7 +61,7 @@ src/Backend
 └── manage.py                     # Django's command-line tool for managing the project
 └── requirements.txt              # Lists all the dependencies required for the backend
 └── README.md                     # Project documentation or setup i
-
+```
 ### Main Features
 
 #### Authentication and User Management
