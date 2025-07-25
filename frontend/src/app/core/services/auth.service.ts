@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   apiUrl = environment.API_URL;
-  user$ = new BehaviorSubject<CustomerUser | null>(null);
+  user = new BehaviorSubject<CustomerUser | null>(null);
+  user$ = this.user.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -25,9 +26,11 @@ export class AuthService {
   ) { }
 
   getDataUser() {
-    return this.user$.getValue();
+    return this.user.getValue();
   }
-
+  setUser(user: CustomerUser | null){
+    this.user.next(user)
+  }
   login(email: string, password: string) {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/api/auth/loginjwt/`, {
       
@@ -36,7 +39,7 @@ export class AuthService {
     })
     .pipe(
       tap(response => {
-       
+        localStorage.setItem('token', response.access);
         this.tokenService.saveToken(response.access);
         this.tokenService.saveRefreshToken(response.refresh);
         
@@ -87,11 +90,11 @@ getProfile() {
   return this.meService.getMeProfile().pipe(
     tap(user => {
       
-      this.user$.next(user);
+      this.user.next(user);
     }),
     catchError(err => {
      
-      this.user$.next(null);
+      this.user.next(null);
       return of(null);
     })
   );
@@ -106,9 +109,11 @@ getProfile() {
 }
 
   logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.tokenService.removeToken();
     this.tokenService.removeRefreshToken();
-    this.user$.next(null);
+    this.setUser(null);
     this.router.navigate(['/login'])
   }
 }

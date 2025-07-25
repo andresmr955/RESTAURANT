@@ -52,6 +52,7 @@ export class LoginForm {
       const { email, password } = this.form.getRawValue();
       this.authService.loginAndGet(email, password).subscribe({
   next: user => {
+      localStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['/dashboard']);
     }
 });
